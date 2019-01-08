@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace mergeExcelFiles
 {
-    public partial class Form1 : Form
+    public partial class frmMerge : Form
     {
-        public Form1()
+        public frmMerge()
         {
             InitializeComponent();
         }
