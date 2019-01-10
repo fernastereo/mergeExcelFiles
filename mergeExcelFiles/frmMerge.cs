@@ -7,13 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace mergeExcelFiles
 {
     public partial class frmMerge : Form
     {
-        const string BASE_PREFIX = "XXX";
-
         public frmMerge()
         {
             InitializeComponent();
@@ -29,13 +28,23 @@ namespace mergeExcelFiles
                 string folderName = sPath.Substring(index + 1);
                 txtProjectPath.Text = sPath;
                 txtProjectPrefix.Text = folderName;
+
+                dbAccess DB = new dbAccess(folderName);
+                txtMasterFile.Text = DB.masterFile;
             }
         }
 
         private void frmMerge_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'excelFilesDataSet.fileDefinition' Puede moverla o quitarla según sea necesario.
-            this.fileDefinitionTableAdapter.Fill(this.excelFilesDataSet.fileDefinition);
+            //// TODO: esta línea de código carga datos en la tabla 'excelFilesDataSet.fileDefinition' Puede moverla o quitarla según sea necesario.
+            //this.fileDefinitionTableAdapter.Fill(this.excelFilesDataSet.fileDefinition);
+            //textBox1.Text = this.excelFilesDataSet.Tables[0].Rows[1][2].ToString();
+            //int n = this.excelFilesDataSet.Tables[0].Rows.Count;
+            //textBox2.Text = n.ToString();
+            //for (int i = 0; i < n; i++)
+            //{
+            //    MessageBox.Show(this.excelFilesDataSet.Tables[0].Rows[i][2].ToString());
+            //}
 
         }
     }

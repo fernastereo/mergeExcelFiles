@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMerge));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtMasterFile = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtProjectPrefix = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnOpenPath = new System.Windows.Forms.Button();
@@ -38,22 +40,14 @@
             this.txtProjectPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.excelFilesDataSet = new mergeExcelFiles.excelFilesDataSet();
-            this.fileDefinitionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fileDefinitionTableAdapter = new mergeExcelFiles.excelFilesDataSetTableAdapters.fileDefinitionTableAdapter();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tittleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.filenameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.initrowDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endrowDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.excelFilesDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fileDefinitionBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtMasterFile);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtProjectPrefix);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btnOpenPath);
@@ -65,6 +59,22 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Carpeta Proyecto";
+            // 
+            // txtMasterFile
+            // 
+            this.txtMasterFile.Location = new System.Drawing.Point(282, 60);
+            this.txtMasterFile.Name = "txtMasterFile";
+            this.txtMasterFile.Size = new System.Drawing.Size(184, 20);
+            this.txtMasterFile.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(189, 63);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Archivo Maestro:";
             // 
             // txtProjectPrefix
             // 
@@ -117,69 +127,17 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.tittleDataGridViewTextBoxColumn,
-            this.filenameDataGridViewTextBoxColumn,
-            this.initrowDataGridViewTextBoxColumn,
-            this.endrowDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.fileDefinitionBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(12, 126);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(656, 150);
             this.dataGridView1.TabIndex = 1;
             // 
-            // excelFilesDataSet
-            // 
-            this.excelFilesDataSet.DataSetName = "excelFilesDataSet";
-            this.excelFilesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // fileDefinitionBindingSource
-            // 
-            this.fileDefinitionBindingSource.DataMember = "fileDefinition";
-            this.fileDefinitionBindingSource.DataSource = this.excelFilesDataSet;
-            // 
-            // fileDefinitionTableAdapter
-            // 
-            this.fileDefinitionTableAdapter.ClearBeforeFill = true;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // tittleDataGridViewTextBoxColumn
-            // 
-            this.tittleDataGridViewTextBoxColumn.DataPropertyName = "tittle";
-            this.tittleDataGridViewTextBoxColumn.HeaderText = "tittle";
-            this.tittleDataGridViewTextBoxColumn.Name = "tittleDataGridViewTextBoxColumn";
-            // 
-            // filenameDataGridViewTextBoxColumn
-            // 
-            this.filenameDataGridViewTextBoxColumn.DataPropertyName = "filename";
-            this.filenameDataGridViewTextBoxColumn.HeaderText = "filename";
-            this.filenameDataGridViewTextBoxColumn.Name = "filenameDataGridViewTextBoxColumn";
-            // 
-            // initrowDataGridViewTextBoxColumn
-            // 
-            this.initrowDataGridViewTextBoxColumn.DataPropertyName = "initrow";
-            this.initrowDataGridViewTextBoxColumn.HeaderText = "initrow";
-            this.initrowDataGridViewTextBoxColumn.Name = "initrowDataGridViewTextBoxColumn";
-            // 
-            // endrowDataGridViewTextBoxColumn
-            // 
-            this.endrowDataGridViewTextBoxColumn.DataPropertyName = "endrow";
-            this.endrowDataGridViewTextBoxColumn.HeaderText = "endrow";
-            this.endrowDataGridViewTextBoxColumn.Name = "endrowDataGridViewTextBoxColumn";
-            // 
             // frmMerge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 450);
+            this.ClientSize = new System.Drawing.Size(688, 450);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -192,8 +150,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.excelFilesDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fileDefinitionBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -208,14 +164,8 @@
         private System.Windows.Forms.TextBox txtProjectPrefix;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private excelFilesDataSet excelFilesDataSet;
-        private System.Windows.Forms.BindingSource fileDefinitionBindingSource;
-        private excelFilesDataSetTableAdapters.fileDefinitionTableAdapter fileDefinitionTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tittleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn filenameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn initrowDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn endrowDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox txtMasterFile;
+        private System.Windows.Forms.Label label3;
     }
 }
 
