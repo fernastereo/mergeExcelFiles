@@ -45,5 +45,11 @@ namespace mergeExcelFiles
         {
             _prefix = "";
         }
+
+        public Boolean mergeData(string sPath, string masterFile, string childFile, int initRow, int endRow)
+        {
+
+            return true;
+        }
     }
 }
