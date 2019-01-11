@@ -42,59 +42,10 @@ namespace mergeExcelFiles
 
         private void btnStartTask_Click(object sender, EventArgs e)
         {
-            /* 
-             * 0- id
-             * 1- tittle
-             * 2- filename
-             * 3- initrow
-             * 4- endrow
-             * 5- status (unbounded)
-             */
-            int n = fileDefinitionDataSet.Tables[0].Rows.Count;
-            int initRow = 0;
-            int endRow = 0;
-            string fileToProcess = "";
-            
-            for (int i = 0; i < n; i++)
-            {
-                fileToProcess = this.fileDefinitionDataSet.Tables[0].Rows[i][2].ToString().Replace(dbAccess.BASE_PREFIX, txtProjectPrefix.Text);
-                initRow = (int)this.fileDefinitionDataSet.Tables[0].Rows[i][3];
-                endRow = (int)this.fileDefinitionDataSet.Tables[0].Rows[i][4];
+            dbAccess DB = new dbAccess();
+            Boolean result = DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, fileDefinitionDataSet, txtProjectPrefix.Text);
 
-                MessageBox.Show($"Tomo el archivo {fileToProcess} y actualizo el maestro Desde la fila {initRow} hasta la fila {endRow} con los codigos que coincidan en ese archivo");
-            }
-        }
-
-        private static void ReadExcelFile()
-        {
-            Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkBook = xlApp.Workbooks.Open(filePath);
-            Excel.Worksheet xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
-            Excel.Range xlRange = xlWorkSheet.UsedRange;
-            int totalRows = xlRange.Rows.Count;
-            int totalColumns = xlRange.Columns.Count;
-
-            string firstValue, secondValue;
-
-            for (int rowCount = 1; rowCount <= totalRows; rowCount++)
-            {
-
-                firstValue = Convert.ToString((xlRange.Cells[rowCount, 1] as Excel.Range).Text);
-                secondValue = Convert.ToString((xlRange.Cells[rowCount, 2] as Excel.Range).Text);
-
-                Console.WriteLine(firstValue + "\t" + secondValue);
-
-            }
-
-            xlWorkBook.Close();
-            xlApp.Quit();
-
-            Marshal.ReleaseComObject(xlWorkSheet);
-            Marshal.ReleaseComObject(xlWorkBook);
-            Marshal.ReleaseComObject(xlApp);
-
-            
+            MessageBox.Show(result.ToString());
         }
     }
 }
