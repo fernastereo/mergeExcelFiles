@@ -8,6 +8,7 @@ using System.Data.OleDb;
 using masterFileExcel = Microsoft.Office.Interop.Excel;
 using childFileExcel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace mergeExcelFiles
 {
@@ -96,29 +97,59 @@ namespace mergeExcelFiles
             //int totalRows = xlRange.Rows.Count;
             //int totalColumns = xlRange.Columns.Count;
 
-            //for each child file:
+            //for each child file in gridView:
             int n = childFiles.Tables[0].Rows.Count;
             string searchCode;
+            string workSheet;
             for (int i = 0; i < n; i++)
             {
-                //Open the child file:
-                fileToProcess = childFiles.Tables[0].Rows[i][2].ToString().Replace(BASE_PREFIX, projectPrefix);
-                initRow = (int)childFiles.Tables[0].Rows[i][3];
-                endRow = (int)childFiles.Tables[0].Rows[i][4];
-
+                //Get the child filename and replace the XXX by project prefix
+                fileToProcess = childFiles.Tables[0].Rows[i]["filename"].ToString().Replace(BASE_PREFIX, projectPrefix);
+                workSheet = childFiles.Tables[0].Rows[i]["worksheet"].ToString();
+                workSheet = workSheet.Substring(0, workSheet.Length - 1);
+                //get the rows for the master file
+                initRow = (int)childFiles.Tables[0].Rows[i]["initrow"];
+                endRow = (int)childFiles.Tables[0].Rows[i]["endrow"];
+                //get the fullpath for the child file
                 filePath = sPath + "\\" + fileToProcess + ".xls";
+                //Open the child file:
                 childFileExcel.Application xlAppChild = new childFileExcel.Application();
-                childFileExcel.Workbook xlWorkBookChild = xlApp.Workbooks.Open(filePath);
-                childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                childFileExcel.Range xlRangeChild = xlWorkSheet.UsedRange;
+                childFileExcel.Workbook xlWorkBookChild = xlAppChild.Workbooks.Open(filePath);
+                childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];
+                //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
+                childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns["A:A"];
 
                 //xlRangeChild.Find()
-                //for each record through init and end in masterfile
+                //for each record from init to end in masterfile
+                Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
                 for (int rowCount = initRow; rowCount <= endRow; rowCount++)
-                {
+                {   
+                    //get the code we will look for in master file
                     searchCode = Convert.ToString((xlRange.Cells[rowCount, 1] as masterFileExcel.Range).Text);
-                    Console.WriteLine(searchCode);
 
+                    if (!string.IsNullOrEmpty(searchCode))
+                    {
+                        // search searchString in the range, if find result, return a range
+                        childFileExcel.Range resultRange = xlRangeChild.Find(
+                            What: searchCode,
+                            LookIn: childFileExcel.XlFindLookIn.xlValues,
+                            LookAt: childFileExcel.XlLookAt.xlPart,
+                            SearchOrder: childFileExcel.XlSearchOrder.xlByRows,
+                            SearchDirection: childFileExcel.XlSearchDirection.xlNext
+                        );
+                        if (resultRange is null)
+                        {
+                            searchCode=string.Concat("***** OK! ***** ", searchCode);
+                        }
+                        else
+                        {
+                            searchCode = string.Concat("-- Not Found-- ", searchCode);
+                        }
+
+                        Console.WriteLine(searchCode);
+                    }
+
+                    
                 }
 
                 //close the child file:
@@ -136,7 +167,21 @@ namespace mergeExcelFiles
             Marshal.ReleaseComObject(xlWorkSheet);
             Marshal.ReleaseComObject(xlWorkBook);
             Marshal.ReleaseComObject(xlApp);
+
+            killExcel();
+
             return true;
+        }
+
+        private void killExcel()
+        {
+            foreach (Process proceso in Process.GetProcesses())
+            {
+                if (proceso.ProcessName == "EXCEL")
+                {
+                    proceso.Kill();
+                }
+            }
         }
     }
 }

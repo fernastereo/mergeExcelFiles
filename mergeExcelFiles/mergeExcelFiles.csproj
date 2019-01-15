@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dbAccess.cs" />
+    <Compile Include="fileDefinitionDataSet.cs">
+      <DependentUpon>fileDefinitionDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="fileDefinitionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
