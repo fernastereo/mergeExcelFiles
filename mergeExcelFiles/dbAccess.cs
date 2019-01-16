@@ -108,8 +108,8 @@ namespace mergeExcelFiles
                 workSheet = childFiles.Tables[0].Rows[i]["worksheet"].ToString();
                 workSheet = workSheet.Substring(0, workSheet.Length - 1);
                 //get the rows for the master file
-                initRow = (int)childFiles.Tables[0].Rows[i]["initrow"];
-                endRow = (int)childFiles.Tables[0].Rows[i]["endrow"];
+                initRow = (int)childFiles.Tables[0].Rows[i]["initrow"] - 1;
+                endRow = (int)childFiles.Tables[0].Rows[i]["endrow"] - 1;
                 //get the fullpath for the child file
                 filePath = sPath + "\\" + fileToProcess + ".xls";
                 //Open the child file:
@@ -117,7 +117,7 @@ namespace mergeExcelFiles
                 childFileExcel.Workbook xlWorkBookChild = xlAppChild.Workbooks.Open(filePath);
                 childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];
                 //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
-                childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns["A:A"];
+                childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns["A:B"];
 
                 //xlRangeChild.Find()
                 //for each record from init to end in masterfile
@@ -137,9 +137,9 @@ namespace mergeExcelFiles
                             SearchOrder: childFileExcel.XlSearchOrder.xlByRows,
                             SearchDirection: childFileExcel.XlSearchDirection.xlNext
                         );
-                        if (resultRange is null)
+                        if (resultRange != null)
                         {
-                            searchCode=string.Concat("***** OK! ***** ", searchCode);
+                            searchCode = string.Concat("***** OK! ***** ", searchCode, " En la fila: ", resultRange.Row);
                         }
                         else
                         {
@@ -148,8 +148,6 @@ namespace mergeExcelFiles
 
                         Console.WriteLine(searchCode);
                     }
-
-                    
                 }
 
                 //close the child file:
