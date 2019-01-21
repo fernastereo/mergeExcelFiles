@@ -18,16 +18,18 @@ namespace mergeExcelFiles
 
         private string _prefix;
         private string _masterFile;
+        private int _masterFileId;
 
         public string masterFile {
             get {
                 _masterFile = "";
-                OleDbDataAdapter dtaMasterfile = new OleDbDataAdapter("select masterfile from configdata where status=1", new OleDbConnection(getConnectionString()));
+                OleDbDataAdapter dtaMasterfile = new OleDbDataAdapter("select masterfile from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(getConnectionString()));
                 DataTable dttMasterFile = new DataTable();
                 dtaMasterfile.Fill(dttMasterFile);
                 if (dttMasterFile.Rows.Count > 0)
                 {
-                    string baseFile = dttMasterFile.Rows[0]["masterfile"].ToString();
+                    string baseFile = dttMasterFile.Rows[0]["masterfile"].ToString().ToUpper();
+                    
                     _masterFile = baseFile.Replace(BASE_PREFIX, _prefix);
                 }
                 return _masterFile;
@@ -39,9 +41,10 @@ namespace mergeExcelFiles
             return System.Configuration.ConfigurationManager.ConnectionStrings["mergeExcelFiles.Properties.Settings.excelFilesConnectionString"].ConnectionString.ToString();
         }
 
-        public dbAccess(string prefix)
+        public dbAccess(string prefix, int masterFileId)
         {
             _prefix = prefix;
+            _masterFileId = masterFileId;
         }
 
         public dbAccess()
@@ -101,6 +104,7 @@ namespace mergeExcelFiles
             int n = childFiles.Tables[0].Rows.Count;
             string searchCode;
             string workSheet;
+            
             for (int i = 0; i < n; i++)
             {
                 //Get the child filename and replace the XXX by project prefix
@@ -119,7 +123,6 @@ namespace mergeExcelFiles
                 //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
                 childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns["A:B"];
 
-                //xlRangeChild.Find()
                 //for each record from init to end in masterfile
                 Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
                 for (int rowCount = initRow; rowCount <= endRow; rowCount++)
@@ -139,7 +142,9 @@ namespace mergeExcelFiles
                         );
                         if (resultRange != null)
                         {
-                            searchCode = string.Concat("***** OK! ***** ", searchCode, " En la fila: ", resultRange.Row);
+                            int rowResult = resultRange.Row;
+                            //****xlWorkSheet.Cells[1, 1] = "ID";
+                            searchCode = string.Concat("***** OK! ***** ", searchCode, " En la fila: ", rowResult);
                         }
                         else
                         {
@@ -180,6 +185,17 @@ namespace mergeExcelFiles
                     proceso.Kill();
                 }
             }
+        }
+
+        public static DataTable getFileDefinition(int masterFileId)
+        {
+            OleDbConnection strConnection = new OleDbConnection(dbAccess.getConnectionString());
+            OleDbCommand strQuery = new OleDbCommand("SELECT tittle, filename, worksheet, initrow, endrow, quantitycol, searchcol FROM fileDefinition WHERE master_id=@master_id ORDER BY id", strConnection);
+            strQuery.Parameters.AddWithValue("@master_id", masterFileId);
+            OleDbDataAdapter dadFileDefinition = new OleDbDataAdapter(strQuery);
+            DataTable dttFileDefinition = new DataTable();
+            dadFileDefinition.Fill(dttFileDefinition);
+            return dttFileDefinition;
         }
     }
 }

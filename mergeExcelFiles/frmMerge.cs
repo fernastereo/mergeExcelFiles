@@ -13,6 +13,8 @@ namespace mergeExcelFiles
 {
     public partial class frmMerge : Form
     {
+        private DataTable _dttExcelFiles;
+
         public frmMerge()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace mergeExcelFiles
         private void btnOpenPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog flb = new FolderBrowserDialog();
-            if (flb.ShowDialog() == DialogResult.OK )
+            if (flb.ShowDialog() == DialogResult.OK)
             {
                 string sPath = flb.SelectedPath;
                 int index = sPath.LastIndexOf('\\');
@@ -29,23 +31,35 @@ namespace mergeExcelFiles
                 txtProjectPath.Text = sPath;
                 txtProjectPrefix.Text = folderName;
 
-                dbAccess DB = new dbAccess(folderName);
+                int master_id = (int)cboMasterFile.SelectedValue;
+                dbAccess DB = new dbAccess(folderName, master_id);
                 txtMasterFile.Text = DB.masterFile;
             }
         }
 
         private void frmMerge_Load(object sender, EventArgs e)
         {
+            // TODO: esta línea de código carga datos en la tabla 'excelFilesDataSet.configData' Puede moverla o quitarla según sea necesario.
+            this.configDataTableAdapter.Fill(this.excelFilesDataSet.configData);
+            // TODO: esta línea de código carga datos en la tabla 'excelFilesDataSet.configData' Puede moverla o quitarla según sea necesario.
+            //this.configDataTableAdapter.Fill(this.excelFilesDataSet.configData);
             // TODO: esta línea de código carga datos en la tabla 'fileDefinitionDataSet.fileDefinition' Puede moverla o quitarla según sea necesario.
-            this.fileDefinitionTableAdapter.Fill(this.fileDefinitionDataSet.fileDefinition);
+            //this.fileDefinitionTableAdapter.Fill(this.fileDefinitionDataSet.fileDefinition);
         }
 
         private void btnStartTask_Click(object sender, EventArgs e)
         {
             dbAccess DB = new dbAccess();
-            Boolean result = DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, fileDefinitionDataSet, txtProjectPrefix.Text);
+            //Boolean result = DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, fileDefinitionDataSet, txtProjectPrefix.Text);
 
-            MessageBox.Show(result.ToString());
+            //MessageBox.Show(result.ToString());
+        }
+
+        private void cboMasterFile_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int master_id = (int)cboMasterFile.SelectedValue;
+            _dttExcelFiles = dbAccess.getFileDefinition(master_id);
+            dgvFileDefinition.DataSource = _dttExcelFiles;
         }
     }
 }

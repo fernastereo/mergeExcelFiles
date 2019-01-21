@@ -52,13 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dbAccess.cs" />
-    <Compile Include="fileDefinitionDataSet.cs">
-      <DependentUpon>fileDefinitionDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="fileDefinitionDataSet.Designer.cs">
+    <Compile Include="excelFilesDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>fileDefinitionDataSet.xsd</DependentUpon>
+      <DependentUpon>excelFilesDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="frmMerge.cs">
       <SubType>Form</SubType>
@@ -80,16 +77,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="fileDefinitionDataSet.xsc">
-      <DependentUpon>fileDefinitionDataSet.xsd</DependentUpon>
+    <None Include="excelFilesDataSet.xsc">
+      <DependentUpon>excelFilesDataSet.xsd</DependentUpon>
     </None>
-    <None Include="fileDefinitionDataSet.xsd">
+    <None Include="excelFilesDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>fileDefinitionDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>excelFilesDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="fileDefinitionDataSet.xss">
-      <DependentUpon>fileDefinitionDataSet.xsd</DependentUpon>
+    <None Include="excelFilesDataSet.xss">
+      <DependentUpon>excelFilesDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

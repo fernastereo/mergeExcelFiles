@@ -20,17 +20,17 @@ namespace mergeExcelFiles {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("fileDefinitionDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("excelFilesDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class fileDefinitionDataSet : global::System.Data.DataSet {
+    public partial class excelFilesDataSet : global::System.Data.DataSet {
         
-        private fileDefinitionDataTable tablefileDefinition;
+        private configDataDataTable tableconfigData;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public fileDefinitionDataSet() {
+        public excelFilesDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace mergeExcelFiles {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        protected fileDefinitionDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected excelFilesDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace mergeExcelFiles {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["fileDefinition"] != null)) {
-                    base.Tables.Add(new fileDefinitionDataTable(ds.Tables["fileDefinition"]));
+                if ((ds.Tables["configData"] != null)) {
+                    base.Tables.Add(new configDataDataTable(ds.Tables["configData"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace mergeExcelFiles {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public fileDefinitionDataTable fileDefinition {
+        public configDataDataTable configData {
             get {
-                return this.tablefileDefinition;
+                return this.tableconfigData;
             }
         }
         
@@ -127,7 +127,7 @@ namespace mergeExcelFiles {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            fileDefinitionDataSet cln = ((fileDefinitionDataSet)(base.Clone()));
+            excelFilesDataSet cln = ((excelFilesDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace mergeExcelFiles {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["fileDefinition"] != null)) {
-                    base.Tables.Add(new fileDefinitionDataTable(ds.Tables["fileDefinition"]));
+                if ((ds.Tables["configData"] != null)) {
+                    base.Tables.Add(new configDataDataTable(ds.Tables["configData"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace mergeExcelFiles {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tablefileDefinition = ((fileDefinitionDataTable)(base.Tables["fileDefinition"]));
+            this.tableconfigData = ((configDataDataTable)(base.Tables["configData"]));
             if ((initTable == true)) {
-                if ((this.tablefileDefinition != null)) {
-                    this.tablefileDefinition.InitVars();
+                if ((this.tableconfigData != null)) {
+                    this.tableconfigData.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace mergeExcelFiles {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "fileDefinitionDataSet";
+            this.DataSetName = "excelFilesDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/fileDefinitionDataSet.xsd";
+            this.Namespace = "http://tempuri.org/excelFilesDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tablefileDefinition = new fileDefinitionDataTable();
-            base.Tables.Add(this.tablefileDefinition);
+            this.tableconfigData = new configDataDataTable();
+            base.Tables.Add(this.tableconfigData);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializefileDefinition() {
+        private bool ShouldSerializeconfigData() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace mergeExcelFiles {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            fileDefinitionDataSet ds = new fileDefinitionDataSet();
+            excelFilesDataSet ds = new excelFilesDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,31 +270,23 @@ namespace mergeExcelFiles {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void fileDefinitionRowChangeEventHandler(object sender, fileDefinitionRowChangeEvent e);
+        public delegate void configDataRowChangeEventHandler(object sender, configDataRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class fileDefinitionDataTable : global::System.Data.TypedTableBase<fileDefinitionRow> {
+        public partial class configDataDataTable : global::System.Data.TypedTableBase<configDataRow> {
             
             private global::System.Data.DataColumn columnid;
             
-            private global::System.Data.DataColumn columntittle;
-            
-            private global::System.Data.DataColumn columnfilename;
-            
-            private global::System.Data.DataColumn columninitrow;
-            
-            private global::System.Data.DataColumn columnendrow;
-            
-            private global::System.Data.DataColumn columnworksheet;
+            private global::System.Data.DataColumn columnmasterfile;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public fileDefinitionDataTable() {
-                this.TableName = "fileDefinition";
+            public configDataDataTable() {
+                this.TableName = "configData";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -302,7 +294,7 @@ namespace mergeExcelFiles {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal fileDefinitionDataTable(global::System.Data.DataTable table) {
+            internal configDataDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -319,7 +311,7 @@ namespace mergeExcelFiles {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected fileDefinitionDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected configDataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -334,41 +326,9 @@ namespace mergeExcelFiles {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn tittleColumn {
+            public global::System.Data.DataColumn masterfileColumn {
                 get {
-                    return this.columntittle;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn filenameColumn {
-                get {
-                    return this.columnfilename;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn initrowColumn {
-                get {
-                    return this.columninitrow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn endrowColumn {
-                get {
-                    return this.columnendrow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn worksheetColumn {
-                get {
-                    return this.columnworksheet;
+                    return this.columnmasterfile;
                 }
             }
             
@@ -383,57 +343,53 @@ namespace mergeExcelFiles {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public fileDefinitionRow this[int index] {
+            public configDataRow this[int index] {
                 get {
-                    return ((fileDefinitionRow)(this.Rows[index]));
+                    return ((configDataRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event fileDefinitionRowChangeEventHandler fileDefinitionRowChanging;
+            public event configDataRowChangeEventHandler configDataRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event fileDefinitionRowChangeEventHandler fileDefinitionRowChanged;
+            public event configDataRowChangeEventHandler configDataRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event fileDefinitionRowChangeEventHandler fileDefinitionRowDeleting;
+            public event configDataRowChangeEventHandler configDataRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event fileDefinitionRowChangeEventHandler fileDefinitionRowDeleted;
+            public event configDataRowChangeEventHandler configDataRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddfileDefinitionRow(fileDefinitionRow row) {
+            public void AddconfigDataRow(configDataRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public fileDefinitionRow AddfileDefinitionRow(string tittle, string filename, int initrow, int endrow, string worksheet) {
-                fileDefinitionRow rowfileDefinitionRow = ((fileDefinitionRow)(this.NewRow()));
+            public configDataRow AddconfigDataRow(string masterfile) {
+                configDataRow rowconfigDataRow = ((configDataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        tittle,
-                        filename,
-                        initrow,
-                        endrow,
-                        worksheet};
-                rowfileDefinitionRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowfileDefinitionRow);
-                return rowfileDefinitionRow;
+                        masterfile};
+                rowconfigDataRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowconfigDataRow);
+                return rowconfigDataRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public fileDefinitionRow FindByid(int id) {
-                return ((fileDefinitionRow)(this.Rows.Find(new object[] {
+            public configDataRow FindByid(int id) {
+                return ((configDataRow)(this.Rows.Find(new object[] {
                             id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                fileDefinitionDataTable cln = ((fileDefinitionDataTable)(base.Clone()));
+                configDataDataTable cln = ((configDataDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -441,18 +397,14 @@ namespace mergeExcelFiles {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new fileDefinitionDataTable();
+                return new configDataDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnid = base.Columns["id"];
-                this.columntittle = base.Columns["tittle"];
-                this.columnfilename = base.Columns["filename"];
-                this.columninitrow = base.Columns["initrow"];
-                this.columnendrow = base.Columns["endrow"];
-                this.columnworksheet = base.Columns["worksheet"];
+                this.columnmasterfile = base.Columns["masterfile"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -460,16 +412,8 @@ namespace mergeExcelFiles {
             private void InitClass() {
                 this.columnid = new global::System.Data.DataColumn("id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid);
-                this.columntittle = new global::System.Data.DataColumn("tittle", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntittle);
-                this.columnfilename = new global::System.Data.DataColumn("filename", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfilename);
-                this.columninitrow = new global::System.Data.DataColumn("initrow", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columninitrow);
-                this.columnendrow = new global::System.Data.DataColumn("endrow", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnendrow);
-                this.columnworksheet = new global::System.Data.DataColumn("worksheet", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnworksheet);
+                this.columnmasterfile = new global::System.Data.DataColumn("masterfile", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmasterfile);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -477,35 +421,33 @@ namespace mergeExcelFiles {
                 this.columnid.AutoIncrementStep = -1;
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
-                this.columntittle.MaxLength = 255;
-                this.columnfilename.MaxLength = 255;
-                this.columnworksheet.MaxLength = 255;
+                this.columnmasterfile.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public fileDefinitionRow NewfileDefinitionRow() {
-                return ((fileDefinitionRow)(this.NewRow()));
+            public configDataRow NewconfigDataRow() {
+                return ((configDataRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new fileDefinitionRow(builder);
+                return new configDataRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(fileDefinitionRow);
+                return typeof(configDataRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.fileDefinitionRowChanged != null)) {
-                    this.fileDefinitionRowChanged(this, new fileDefinitionRowChangeEvent(((fileDefinitionRow)(e.Row)), e.Action));
+                if ((this.configDataRowChanged != null)) {
+                    this.configDataRowChanged(this, new configDataRowChangeEvent(((configDataRow)(e.Row)), e.Action));
                 }
             }
             
@@ -513,8 +455,8 @@ namespace mergeExcelFiles {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.fileDefinitionRowChanging != null)) {
-                    this.fileDefinitionRowChanging(this, new fileDefinitionRowChangeEvent(((fileDefinitionRow)(e.Row)), e.Action));
+                if ((this.configDataRowChanging != null)) {
+                    this.configDataRowChanging(this, new configDataRowChangeEvent(((configDataRow)(e.Row)), e.Action));
                 }
             }
             
@@ -522,8 +464,8 @@ namespace mergeExcelFiles {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.fileDefinitionRowDeleted != null)) {
-                    this.fileDefinitionRowDeleted(this, new fileDefinitionRowChangeEvent(((fileDefinitionRow)(e.Row)), e.Action));
+                if ((this.configDataRowDeleted != null)) {
+                    this.configDataRowDeleted(this, new configDataRowChangeEvent(((configDataRow)(e.Row)), e.Action));
                 }
             }
             
@@ -531,14 +473,14 @@ namespace mergeExcelFiles {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.fileDefinitionRowDeleting != null)) {
-                    this.fileDefinitionRowDeleting(this, new fileDefinitionRowChangeEvent(((fileDefinitionRow)(e.Row)), e.Action));
+                if ((this.configDataRowDeleting != null)) {
+                    this.configDataRowDeleting(this, new configDataRowChangeEvent(((configDataRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemovefileDefinitionRow(fileDefinitionRow row) {
+            public void RemoveconfigDataRow(configDataRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -547,7 +489,7 @@ namespace mergeExcelFiles {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                fileDefinitionDataSet ds = new fileDefinitionDataSet();
+                excelFilesDataSet ds = new excelFilesDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -565,7 +507,7 @@ namespace mergeExcelFiles {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "fileDefinitionDataTable";
+                attribute2.FixedValue = "configDataDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -609,166 +551,54 @@ namespace mergeExcelFiles {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class fileDefinitionRow : global::System.Data.DataRow {
+        public partial class configDataRow : global::System.Data.DataRow {
             
-            private fileDefinitionDataTable tablefileDefinition;
+            private configDataDataTable tableconfigData;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal fileDefinitionRow(global::System.Data.DataRowBuilder rb) : 
+            internal configDataRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tablefileDefinition = ((fileDefinitionDataTable)(this.Table));
+                this.tableconfigData = ((configDataDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int id {
                 get {
-                    return ((int)(this[this.tablefileDefinition.idColumn]));
+                    return ((int)(this[this.tableconfigData.idColumn]));
                 }
                 set {
-                    this[this.tablefileDefinition.idColumn] = value;
+                    this[this.tableconfigData.idColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string tittle {
+            public string masterfile {
                 get {
                     try {
-                        return ((string)(this[this.tablefileDefinition.tittleColumn]));
+                        return ((string)(this[this.tableconfigData.masterfileColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'tittle\' de la tabla \'fileDefinition\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'masterfile\' de la tabla \'configData\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablefileDefinition.tittleColumn] = value;
+                    this[this.tableconfigData.masterfileColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string filename {
-                get {
-                    try {
-                        return ((string)(this[this.tablefileDefinition.filenameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'filename\' de la tabla \'fileDefinition\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablefileDefinition.filenameColumn] = value;
-                }
+            public bool IsmasterfileNull() {
+                return this.IsNull(this.tableconfigData.masterfileColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int initrow {
-                get {
-                    try {
-                        return ((int)(this[this.tablefileDefinition.initrowColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'initrow\' de la tabla \'fileDefinition\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablefileDefinition.initrowColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int endrow {
-                get {
-                    try {
-                        return ((int)(this[this.tablefileDefinition.endrowColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'endrow\' de la tabla \'fileDefinition\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablefileDefinition.endrowColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string worksheet {
-                get {
-                    try {
-                        return ((string)(this[this.tablefileDefinition.worksheetColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'worksheet\' de la tabla \'fileDefinition\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablefileDefinition.worksheetColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IstittleNull() {
-                return this.IsNull(this.tablefileDefinition.tittleColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SettittleNull() {
-                this[this.tablefileDefinition.tittleColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsfilenameNull() {
-                return this.IsNull(this.tablefileDefinition.filenameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetfilenameNull() {
-                this[this.tablefileDefinition.filenameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsinitrowNull() {
-                return this.IsNull(this.tablefileDefinition.initrowColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetinitrowNull() {
-                this[this.tablefileDefinition.initrowColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsendrowNull() {
-                return this.IsNull(this.tablefileDefinition.endrowColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetendrowNull() {
-                this[this.tablefileDefinition.endrowColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsworksheetNull() {
-                return this.IsNull(this.tablefileDefinition.worksheetColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetworksheetNull() {
-                this[this.tablefileDefinition.worksheetColumn] = global::System.Convert.DBNull;
+            public void SetmasterfileNull() {
+                this[this.tableconfigData.masterfileColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -776,22 +606,22 @@ namespace mergeExcelFiles {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class fileDefinitionRowChangeEvent : global::System.EventArgs {
+        public class configDataRowChangeEvent : global::System.EventArgs {
             
-            private fileDefinitionRow eventRow;
+            private configDataRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public fileDefinitionRowChangeEvent(fileDefinitionRow row, global::System.Data.DataRowAction action) {
+            public configDataRowChangeEvent(configDataRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public fileDefinitionRow Row {
+            public configDataRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -807,7 +637,7 @@ namespace mergeExcelFiles {
         }
     }
 }
-namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
+namespace mergeExcelFiles.excelFilesDataSetTableAdapters {
     
     
     /// <summary>
@@ -819,7 +649,7 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class fileDefinitionTableAdapter : global::System.ComponentModel.Component {
+    public partial class configDataTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.OleDb.OleDbDataAdapter _adapter;
         
@@ -833,7 +663,7 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public fileDefinitionTableAdapter() {
+        public configDataTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -930,59 +760,32 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
             this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "fileDefinition";
+            tableMapping.DataSetTable = "configData";
             tableMapping.ColumnMappings.Add("id", "id");
-            tableMapping.ColumnMappings.Add("tittle", "tittle");
-            tableMapping.ColumnMappings.Add("filename", "filename");
-            tableMapping.ColumnMappings.Add("initrow", "initrow");
-            tableMapping.ColumnMappings.Add("endrow", "endrow");
-            tableMapping.ColumnMappings.Add("worksheet", "worksheet");
+            tableMapping.ColumnMappings.Add("masterfile", "masterfile");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `fileDefinition` WHERE ((`id` = ?) AND ((? = 1 AND `tittle` IS NULL) OR (`tittle` = ?)) AND ((? = 1 AND `filename` IS NULL) OR (`filename` = ?)) AND ((? = 1 AND `worksheet` IS NULL) OR (`worksheet` = ?)) AND ((? = 1 AND `initrow` IS NULL) OR (`initrow` = ?)) AND ((? = 1 AND `endrow` IS NULL) OR (`endrow` = ?)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM `configData` WHERE ((`id` = ?) AND ((? = 1 AND `masterfile` IS NULL) " +
+                "OR (`masterfile` = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_tittle", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tittle", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_tittle", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tittle", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_filename", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "filename", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_filename", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "filename", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_worksheet", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "worksheet", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_worksheet", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "worksheet", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_initrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initrow", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_initrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initrow", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_endrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "endrow", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_endrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "endrow", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_masterfile", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "masterfile", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_masterfile", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "masterfile", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `fileDefinition` (`tittle`, `filename`, `worksheet`, `initrow`, `endr" +
-                "ow`) VALUES (?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `configData` (`masterfile`) VALUES (?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("tittle", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tittle", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("filename", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "filename", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("worksheet", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "worksheet", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("initrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initrow", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("endrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "endrow", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("masterfile", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "masterfile", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `fileDefinition` SET `tittle` = ?, `filename` = ?, `worksheet` = ?, `initrow` = ?, `endrow` = ? WHERE ((`id` = ?) AND ((? = 1 AND `tittle` IS NULL) OR (`tittle` = ?)) AND ((? = 1 AND `filename` IS NULL) OR (`filename` = ?)) AND ((? = 1 AND `worksheet` IS NULL) OR (`worksheet` = ?)) AND ((? = 1 AND `initrow` IS NULL) OR (`initrow` = ?)) AND ((? = 1 AND `endrow` IS NULL) OR (`endrow` = ?)))";
+            this._adapter.UpdateCommand.CommandText = "UPDATE `configData` SET `masterfile` = ? WHERE ((`id` = ?) AND ((? = 1 AND `maste" +
+                "rfile` IS NULL) OR (`masterfile` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("tittle", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tittle", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("filename", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "filename", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("worksheet", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "worksheet", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("initrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initrow", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("endrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "endrow", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("masterfile", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "masterfile", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_tittle", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tittle", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_tittle", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tittle", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_filename", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "filename", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_filename", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "filename", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_worksheet", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "worksheet", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_worksheet", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "worksheet", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_initrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initrow", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_initrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initrow", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_endrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "endrow", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_endrow", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "endrow", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_masterfile", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "masterfile", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_masterfile", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "masterfile", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -998,8 +801,7 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, tittle, filename, worksheet, initrow, endrow FROM fileDefinition ORDER" +
-                " BY id";
+            this._commandCollection[0].CommandText = "SELECT id, masterfile FROM configData";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1007,7 +809,7 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(fileDefinitionDataSet.fileDefinitionDataTable dataTable) {
+        public virtual int Fill(excelFilesDataSet.configDataDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1020,9 +822,9 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual fileDefinitionDataSet.fileDefinitionDataTable GetData() {
+        public virtual excelFilesDataSet.configDataDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            fileDefinitionDataSet.fileDefinitionDataTable dataTable = new fileDefinitionDataSet.fileDefinitionDataTable();
+            excelFilesDataSet.configDataDataTable dataTable = new excelFilesDataSet.configDataDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1030,15 +832,15 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(fileDefinitionDataSet.fileDefinitionDataTable dataTable) {
+        public virtual int Update(excelFilesDataSet.configDataDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(fileDefinitionDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "fileDefinition");
+        public virtual int Update(excelFilesDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "configData");
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1060,47 +862,15 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_id, string Original_tittle, string Original_filename, string Original_worksheet, global::System.Nullable<int> Original_initrow, global::System.Nullable<int> Original_endrow) {
+        public virtual int Delete(int Original_id, string Original_masterfile) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id));
-            if ((Original_tittle == null)) {
+            if ((Original_masterfile == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_tittle));
-            }
-            if ((Original_filename == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_filename));
-            }
-            if ((Original_worksheet == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_worksheet));
-            }
-            if ((Original_initrow.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_initrow.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_endrow.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_endrow.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_masterfile));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1122,36 +892,12 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string tittle, string filename, string worksheet, global::System.Nullable<int> initrow, global::System.Nullable<int> endrow) {
-            if ((tittle == null)) {
+        public virtual int Insert(string masterfile) {
+            if ((masterfile == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(tittle));
-            }
-            if ((filename == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(filename));
-            }
-            if ((worksheet == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(worksheet));
-            }
-            if ((initrow.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(initrow.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((endrow.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(endrow.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(masterfile));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1173,77 +919,21 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string tittle, string filename, string worksheet, global::System.Nullable<int> initrow, global::System.Nullable<int> endrow, int Original_id, string Original_tittle, string Original_filename, string Original_worksheet, global::System.Nullable<int> Original_initrow, global::System.Nullable<int> Original_endrow) {
-            if ((tittle == null)) {
+        public virtual int Update(string masterfile, int Original_id, string Original_masterfile) {
+            if ((masterfile == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(tittle));
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(masterfile));
             }
-            if ((filename == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(filename));
-            }
-            if ((worksheet == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(worksheet));
-            }
-            if ((initrow.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(initrow.Value));
-            }
-            else {
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_id));
+            if ((Original_masterfile == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((endrow.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(endrow.Value));
-            }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_id));
-            if ((Original_tittle == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_tittle));
-            }
-            if ((Original_filename == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_filename));
-            }
-            if ((Original_worksheet == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_worksheet));
-            }
-            if ((Original_initrow.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_initrow.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((Original_endrow.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_endrow.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Original_masterfile));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1274,7 +964,7 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         
         private UpdateOrderOption _updateOrder;
         
-        private fileDefinitionTableAdapter _fileDefinitionTableAdapter;
+        private configDataTableAdapter _configDataTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -1296,12 +986,12 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public fileDefinitionTableAdapter fileDefinitionTableAdapter {
+        public configDataTableAdapter configDataTableAdapter {
             get {
-                return this._fileDefinitionTableAdapter;
+                return this._configDataTableAdapter;
             }
             set {
-                this._fileDefinitionTableAdapter = value;
+                this._configDataTableAdapter = value;
             }
         }
         
@@ -1324,9 +1014,9 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._fileDefinitionTableAdapter != null) 
-                            && (this._fileDefinitionTableAdapter.Connection != null))) {
-                    return this._fileDefinitionTableAdapter.Connection;
+                if (((this._configDataTableAdapter != null) 
+                            && (this._configDataTableAdapter.Connection != null))) {
+                    return this._configDataTableAdapter.Connection;
                 }
                 return null;
             }
@@ -1341,7 +1031,7 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._fileDefinitionTableAdapter != null)) {
+                if ((this._configDataTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -1353,14 +1043,14 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateUpdatedRows(fileDefinitionDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(excelFilesDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._fileDefinitionTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.fileDefinition.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._configDataTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.configData.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._fileDefinitionTableAdapter.Update(updatedRows));
+                    result = (result + this._configDataTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -1372,13 +1062,13 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateInsertedRows(fileDefinitionDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(excelFilesDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._fileDefinitionTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.fileDefinition.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._configDataTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.configData.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._fileDefinitionTableAdapter.Update(addedRows));
+                    result = (result + this._configDataTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -1390,13 +1080,13 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateDeletedRows(fileDefinitionDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(excelFilesDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._fileDefinitionTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.fileDefinition.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._configDataTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.configData.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._fileDefinitionTableAdapter.Update(deletedRows));
+                    result = (result + this._configDataTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -1432,15 +1122,15 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public virtual int UpdateAll(fileDefinitionDataSet dataSet) {
+        public virtual int UpdateAll(excelFilesDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._fileDefinitionTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._fileDefinitionTableAdapter.Connection) == false))) {
+            if (((this._configDataTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._configDataTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
                         "sma cadena de conexión.");
             }
@@ -1476,13 +1166,13 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._fileDefinitionTableAdapter != null)) {
-                    revertConnections.Add(this._fileDefinitionTableAdapter, this._fileDefinitionTableAdapter.Connection);
-                    this._fileDefinitionTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fileDefinitionTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
-                    if (this._fileDefinitionTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._fileDefinitionTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._fileDefinitionTableAdapter.Adapter);
+                if ((this._configDataTableAdapter != null)) {
+                    revertConnections.Add(this._configDataTableAdapter, this._configDataTableAdapter.Connection);
+                    this._configDataTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
+                    this._configDataTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    if (this._configDataTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._configDataTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._configDataTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -1543,9 +1233,9 @@ namespace mergeExcelFiles.fileDefinitionDataSetTableAdapters {
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._fileDefinitionTableAdapter != null)) {
-                    this._fileDefinitionTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fileDefinitionTableAdapter]));
-                    this._fileDefinitionTableAdapter.Transaction = null;
+                if ((this._configDataTableAdapter != null)) {
+                    this._configDataTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._configDataTableAdapter]));
+                    this._configDataTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
