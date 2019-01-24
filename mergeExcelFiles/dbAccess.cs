@@ -83,8 +83,8 @@ namespace mergeExcelFiles
             //for each child file in gridView:
             int n = childFiles.Rows.Count;
             string searchCode;
-            string workSheet;
-            
+            string workSheet;            
+
             for (int i = 0; i < n; i++)
             {
                 //Get the child filename and replace the XXX by project prefix
@@ -106,8 +106,10 @@ namespace mergeExcelFiles
                 //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
                 childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns[searchColChild];
 
+                string qCol = _quantityCol();
+
                 //for each record from init to end in masterfile
-                Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
+                //Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
                 for (int rowCount = initRow; rowCount <= endRow; rowCount++)
                 {   
                     //get the code we will look for in master file
@@ -125,19 +127,19 @@ namespace mergeExcelFiles
                         );
                         if (resultRange != null)
                         {
-                            int rowResult = resultRange.Row;
-                            string qCol = _quantityCol();
-                            //Convert.ToString((xlRange.Cells[rowCount, 1] as Excel.Range).Text);
+                            int rowResult = resultRange.Row;                            
+                            
                             string childValue = Convert.ToString((xlWorkSheetChild.Cells[rowResult, quantityColChild] as masterFileExcel.Range).Text);
                             xlWorkSheet.Cells[rowCount, qCol] = childValue;
-                            searchCode = string.Concat("***** OK! ***** ", searchCode, " En la fila: ", rowResult);
+                            //searchCode = string.Concat("***** OK! ***** ", searchCode, " En la fila: ", rowResult);
                         }
                         else
                         {
-                            searchCode = string.Concat("-- Not Found-- ", searchCode);
+                            xlWorkSheet.Cells[rowCount, qCol] = "";
+                            //searchCode = string.Concat("-- Not Found-- ", searchCode);
                         }
 
-                        Console.WriteLine(searchCode);
+                        //Console.WriteLine(searchCode);
                     }
                 }
 
