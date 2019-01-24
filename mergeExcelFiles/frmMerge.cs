@@ -23,6 +23,10 @@ namespace mergeExcelFiles
         private void btnOpenPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog flb = new FolderBrowserDialog();
+
+            //Quitar la siguiente linea antes de entregar
+            flb.SelectedPath = "C:\\Users\\Fernast\\Documents\\Proyectos\\Upwork\\Marga Company\\NUE";
+            //*******************************************
             if (flb.ShowDialog() == DialogResult.OK)
             {
                 string sPath = flb.SelectedPath;
@@ -41,18 +45,16 @@ namespace mergeExcelFiles
         {
             // TODO: esta línea de código carga datos en la tabla 'excelFilesDataSet.configData' Puede moverla o quitarla según sea necesario.
             this.configDataTableAdapter.Fill(this.excelFilesDataSet.configData);
-            // TODO: esta línea de código carga datos en la tabla 'excelFilesDataSet.configData' Puede moverla o quitarla según sea necesario.
-            //this.configDataTableAdapter.Fill(this.excelFilesDataSet.configData);
-            // TODO: esta línea de código carga datos en la tabla 'fileDefinitionDataSet.fileDefinition' Puede moverla o quitarla según sea necesario.
-            //this.fileDefinitionTableAdapter.Fill(this.fileDefinitionDataSet.fileDefinition);
         }
 
         private void btnStartTask_Click(object sender, EventArgs e)
         {
-            dbAccess DB = new dbAccess();
-            //Boolean result = DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, fileDefinitionDataSet, txtProjectPrefix.Text);
+            int master_id = (int)cboMasterFile.SelectedValue;
+            dbAccess DB = new dbAccess(master_id);
+            
+            bool result = DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, _dttExcelFiles, txtProjectPrefix.Text);
 
-            //MessageBox.Show(result.ToString());
+            MessageBox.Show(result.ToString());
         }
 
         private void cboMasterFile_SelectionChangeCommitted(object sender, EventArgs e)

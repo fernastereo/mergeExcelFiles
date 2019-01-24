@@ -41,11 +41,6 @@
             this.txtProjectPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvFileDefinition = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cboMasterFile = new System.Windows.Forms.ComboBox();
-            this.excelFilesDataSet = new mergeExcelFiles.excelFilesDataSet();
-            this.configDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.configDataTableAdapter = new mergeExcelFiles.excelFilesDataSetTableAdapters.configDataTableAdapter();
             this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,10 +48,16 @@
             this.endrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantitycol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchcol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cboMasterFile = new System.Windows.Forms.ComboBox();
+            this.configDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.excelFilesDataSet = new mergeExcelFiles.excelFilesDataSet();
+            this.configDataTableAdapter = new mergeExcelFiles.excelFilesDataSetTableAdapters.configDataTableAdapter();
+            this.pgbMergeFiles = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileDefinition)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.excelFilesDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configDataBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.excelFilesDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -180,41 +181,6 @@
             this.dgvFileDefinition.Size = new System.Drawing.Size(661, 327);
             this.dgvFileDefinition.TabIndex = 1;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(165, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Seleccione Maestro a Consolidar:";
-            // 
-            // cboMasterFile
-            // 
-            this.cboMasterFile.DataSource = this.configDataBindingSource;
-            this.cboMasterFile.DisplayMember = "masterfile";
-            this.cboMasterFile.FormattingEnabled = true;
-            this.cboMasterFile.Location = new System.Drawing.Point(183, 17);
-            this.cboMasterFile.Name = "cboMasterFile";
-            this.cboMasterFile.Size = new System.Drawing.Size(218, 21);
-            this.cboMasterFile.TabIndex = 3;
-            this.cboMasterFile.ValueMember = "id";
-            this.cboMasterFile.SelectionChangeCommitted += new System.EventHandler(this.cboMasterFile_SelectionChangeCommitted);
-            // 
-            // excelFilesDataSet
-            // 
-            this.excelFilesDataSet.DataSetName = "excelFilesDataSet";
-            this.excelFilesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // configDataBindingSource
-            // 
-            this.configDataBindingSource.DataMember = "configData";
-            this.configDataBindingSource.DataSource = this.excelFilesDataSet;
-            // 
-            // configDataTableAdapter
-            // 
-            this.configDataTableAdapter.ClearBeforeFill = true;
-            // 
             // tittle
             // 
             this.tittle.DataPropertyName = "tittle";
@@ -266,11 +232,54 @@
             this.searchcol.ReadOnly = true;
             this.searchcol.Visible = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(165, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Seleccione Maestro a Consolidar:";
+            // 
+            // cboMasterFile
+            // 
+            this.cboMasterFile.DataSource = this.configDataBindingSource;
+            this.cboMasterFile.DisplayMember = "masterfile";
+            this.cboMasterFile.FormattingEnabled = true;
+            this.cboMasterFile.Location = new System.Drawing.Point(183, 17);
+            this.cboMasterFile.Name = "cboMasterFile";
+            this.cboMasterFile.Size = new System.Drawing.Size(218, 21);
+            this.cboMasterFile.TabIndex = 3;
+            this.cboMasterFile.ValueMember = "id";
+            this.cboMasterFile.SelectionChangeCommitted += new System.EventHandler(this.cboMasterFile_SelectionChangeCommitted);
+            // 
+            // configDataBindingSource
+            // 
+            this.configDataBindingSource.DataMember = "configData";
+            this.configDataBindingSource.DataSource = this.excelFilesDataSet;
+            // 
+            // excelFilesDataSet
+            // 
+            this.excelFilesDataSet.DataSetName = "excelFilesDataSet";
+            this.excelFilesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // configDataTableAdapter
+            // 
+            this.configDataTableAdapter.ClearBeforeFill = true;
+            // 
+            // pgbMergeFiles
+            // 
+            this.pgbMergeFiles.Location = new System.Drawing.Point(12, 499);
+            this.pgbMergeFiles.Name = "pgbMergeFiles";
+            this.pgbMergeFiles.Size = new System.Drawing.Size(661, 23);
+            this.pgbMergeFiles.TabIndex = 4;
+            // 
             // frmMerge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 541);
+            this.ClientSize = new System.Drawing.Size(685, 534);
+            this.Controls.Add(this.pgbMergeFiles);
             this.Controls.Add(this.cboMasterFile);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgvFileDefinition);
@@ -285,8 +294,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileDefinition)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.excelFilesDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.configDataBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.excelFilesDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,6 +326,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endrow;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantitycol;
         private System.Windows.Forms.DataGridViewTextBoxColumn searchcol;
+        private System.Windows.Forms.ProgressBar pgbMergeFiles;
     }
 }
 

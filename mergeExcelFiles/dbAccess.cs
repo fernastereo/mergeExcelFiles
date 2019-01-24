@@ -23,17 +23,29 @@ namespace mergeExcelFiles
         public string masterFile {
             get {
                 _masterFile = "";
-                OleDbDataAdapter dtaMasterfile = new OleDbDataAdapter("select masterfile from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(getConnectionString()));
+                OleDbDataAdapter dtaMasterfile = new OleDbDataAdapter("select masterfile, quantitycol from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(getConnectionString()));
                 DataTable dttMasterFile = new DataTable();
                 dtaMasterfile.Fill(dttMasterFile);
                 if (dttMasterFile.Rows.Count > 0)
                 {
                     string baseFile = dttMasterFile.Rows[0]["masterfile"].ToString().ToUpper();
-                    
                     _masterFile = baseFile.Replace(BASE_PREFIX, _prefix);
                 }
                 return _masterFile;
             }
+        }
+
+        private string _quantityCol()
+        {
+            OleDbDataAdapter dtaQuantityCol = new OleDbDataAdapter("select quantitycol from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(getConnectionString()));
+            DataTable dttQuantityCol = new DataTable();
+            dtaQuantityCol.Fill(dttQuantityCol);
+            if (dttQuantityCol.Rows.Count > 0)
+            {
+                return dttQuantityCol.Rows[0]["quantitycol"].ToString();
+            }
+
+            return "";
         }
 
         public static string getConnectionString()
@@ -47,73 +59,44 @@ namespace mergeExcelFiles
             _masterFileId = masterFileId;
         }
 
-        public dbAccess()
+        public dbAccess(int masterFileId)
         {
             _prefix = "";
+            _masterFileId = masterFileId;
         }
 
-        //private List<string> getChildFiles()
-        //{
-        //    List<String> fileNames = new List<String>();
-
-        //    using (OleDbConnection connection = new OleDbConnection(getConnectionString()))
-        //    {
-        //        connection.Open();
-        //        string query = "select filename from filedefinition";
-        //        using (OleDbCommand command = new OleDbCommand(query, connection))
-        //        {
-        //            using (OleDbDataReader reader = command.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    fileNames.Add(reader.GetString(0));
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return fileNames;
-        //}
-
-        public Boolean mergeData(string sPath, string masterFile, DataSet childFiles, string projectPrefix)
+        public Boolean mergeData(string sPath, string masterFile, DataTable childFiles, string projectPrefix)
         {
-            //int n = childFiles.Tables[0].Rows.Count;
             int initRow = 0;
             int endRow = 0;
             string fileToProcess = "";
 
-            //for (int i = 0; i < n; i++)
-            //{
-            //    fileToProcess = childFiles.Tables[0].Rows[i][2].ToString().Replace(BASE_PREFIX, projectPrefix);
-            //    initRow = (int)childFiles.Tables[0].Rows[i][3];
-            //    endRow = (int)childFiles.Tables[0].Rows[i][4];
-
-            //    Console.WriteLine($"Tomo el archivo {fileToProcess} y actualizo el maestro Desde la fila {initRow} hasta la fila {endRow} con los codigos que coincidan en ese archivo");
-            //}
-
             //Open master file:
             string filePath = sPath + "\\" + masterFile;
             masterFileExcel.Application xlApp = new masterFileExcel.Application();
+            //I Must catch a exception here when the file doesn't exits in folder------>>>>
             masterFileExcel.Workbook xlWorkBook = xlApp.Workbooks.Open(filePath);
             masterFileExcel.Worksheet xlWorkSheet = (masterFileExcel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             masterFileExcel.Range xlRange = xlWorkSheet.UsedRange;
-            //int totalRows = xlRange.Rows.Count;
-            //int totalColumns = xlRange.Columns.Count;
 
             //for each child file in gridView:
-            int n = childFiles.Tables[0].Rows.Count;
+            int n = childFiles.Rows.Count;
             string searchCode;
             string workSheet;
             
             for (int i = 0; i < n; i++)
             {
                 //Get the child filename and replace the XXX by project prefix
-                fileToProcess = childFiles.Tables[0].Rows[i]["filename"].ToString().Replace(BASE_PREFIX, projectPrefix);
-                workSheet = childFiles.Tables[0].Rows[i]["worksheet"].ToString();
+                fileToProcess = childFiles.Rows[i]["filename"].ToString().ToUpper().Replace(BASE_PREFIX, projectPrefix);
+                workSheet = childFiles.Rows[i]["worksheet"].ToString();
                 workSheet = workSheet.Substring(0, workSheet.Length - 1);
                 //get the rows for the master file
-                initRow = (int)childFiles.Tables[0].Rows[i]["initrow"] - 1;
-                endRow = (int)childFiles.Tables[0].Rows[i]["endrow"] - 1;
+                initRow = (int)childFiles.Rows[i]["initrow"];
+                endRow = (int)childFiles.Rows[i]["endrow"];
+                string searchColChild = (string)childFiles.Rows[i]["searchcol"];
+                string quantityColChild = (string)childFiles.Rows[i]["quantitycol"];
+
                 //get the fullpath for the child file
                 filePath = sPath + "\\" + fileToProcess + ".xls";
                 //Open the child file:
@@ -121,7 +104,7 @@ namespace mergeExcelFiles
                 childFileExcel.Workbook xlWorkBookChild = xlAppChild.Workbooks.Open(filePath);
                 childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];
                 //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
-                childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns["A:B"];
+                childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns[searchColChild];
 
                 //for each record from init to end in masterfile
                 Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
@@ -130,7 +113,7 @@ namespace mergeExcelFiles
                     //get the code we will look for in master file
                     searchCode = Convert.ToString((xlRange.Cells[rowCount, 1] as masterFileExcel.Range).Text);
 
-                    if (!string.IsNullOrEmpty(searchCode))
+                    if (!string.IsNullOrEmpty(searchCode) && searchCode.Length > 1)
                     {
                         // search searchString in the range, if find result, return a range
                         childFileExcel.Range resultRange = xlRangeChild.Find(
@@ -143,7 +126,10 @@ namespace mergeExcelFiles
                         if (resultRange != null)
                         {
                             int rowResult = resultRange.Row;
-                            //****xlWorkSheet.Cells[1, 1] = "ID";
+                            string qCol = _quantityCol();
+                            //Convert.ToString((xlRange.Cells[rowCount, 1] as Excel.Range).Text);
+                            string childValue = Convert.ToString((xlWorkSheetChild.Cells[rowResult, quantityColChild] as masterFileExcel.Range).Text);
+                            xlWorkSheet.Cells[rowCount, qCol] = childValue;
                             searchCode = string.Concat("***** OK! ***** ", searchCode, " En la fila: ", rowResult);
                         }
                         else
@@ -163,8 +149,9 @@ namespace mergeExcelFiles
                 Marshal.ReleaseComObject(xlWorkBookChild);
                 Marshal.ReleaseComObject(xlAppChild);
             }
+            xlWorkBook.Save();
 
-            xlWorkBook.Close(false);
+            xlWorkBook.Close(true);
             xlApp.Quit();
 
             Marshal.ReleaseComObject(xlWorkSheet);
