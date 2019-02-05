@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mergeExcelFiles", "mergeExcelFiles\mergeExcelFiles.csproj", "{BA20B225-FE9B-47EE-BB6D-331A71828A9F}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "mergeExcelFiles_Installer", "mergeExcelFiles_Installer\mergeExcelFiles_Installer.vdproj", "{F256A9E4-3684-4AC7-B6E5-F7555E9059D4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,8 +15,6 @@ Global
 		{BA20B225-FE9B-47EE-BB6D-331A71828A9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA20B225-FE9B-47EE-BB6D-331A71828A9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA20B225-FE9B-47EE-BB6D-331A71828A9F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F256A9E4-3684-4AC7-B6E5-F7555E9059D4}.Debug|Any CPU.ActiveCfg = Debug
-		{F256A9E4-3684-4AC7-B6E5-F7555E9059D4}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
