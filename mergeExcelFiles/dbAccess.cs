@@ -179,7 +179,7 @@ namespace mergeExcelFiles
         public static DataTable getFileDefinition(int masterFileId)
         {
             OleDbConnection strConnection = new OleDbConnection(dbAccess.getConnectionString());
-            OleDbCommand strQuery = new OleDbCommand("SELECT tittle, filename, worksheet, initrow, endrow, quantitycol, searchcol FROM fileDefinition WHERE master_id=@master_id ORDER BY id", strConnection);
+            OleDbCommand strQuery = new OleDbCommand("select f.tittle, f.filename, w.worksheet, f.initrow, f.endrow, w.quantitycol, w.searchcol from filedefinition f, worksheet w where f.id=w.filedefinition_id and f.master_id=@master_id order by f.id, w.id", strConnection);
             strQuery.Parameters.AddWithValue("@master_id", masterFileId);
             OleDbDataAdapter dadFileDefinition = new OleDbDataAdapter(strQuery);
             DataTable dttFileDefinition = new DataTable();
