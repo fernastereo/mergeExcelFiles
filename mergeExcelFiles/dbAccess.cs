@@ -67,10 +67,11 @@ namespace mergeExcelFiles
 
         public Boolean mergeData(string sPath, string masterFile, DataTable childFiles, string projectPrefix)
         {
+            int fileDefinitionId = 0;
             int initRow = 0;
             int endRow = 0;
             string fileToProcess = "";
-
+            
             //Open master file:
             string filePath = sPath + "\\" + masterFile;
             masterFileExcel.Application xlApp = new masterFileExcel.Application();
@@ -83,16 +84,35 @@ namespace mergeExcelFiles
             //for each child file in gridView:
             int n = childFiles.Rows.Count;
             string searchCode;
-            string workSheet;            
+            string workSheet;
 
             for (int i = 0; i < n; i++)
             {
                 //Get the child filename and replace the XXX by project prefix
                 fileToProcess = childFiles.Rows[i]["filename"].ToString().ToUpper().Replace(BASE_PREFIX, projectPrefix);
                 //get the rows for the master file
+                fileDefinitionId = (int)childFiles.Rows[i]["id"];
                 initRow = (int)childFiles.Rows[i]["initrow"];
                 endRow = (int)childFiles.Rows[i]["endrow"];
 
+                //Before get the worksheets we must open the file here!!!!
+
+
+                DataTable dttWorkSheets = getWorkSheets(fileDefinitionId);
+                foreach (DataRow dtrWorkSheet in dttWorkSheets.Rows)
+                {
+                    workSheet = dtrWorkSheet["worksheet"].ToString(); //<<-- Here is where I assign the worksheet
+                    workSheet = workSheet.Substring(0, workSheet.Length - 1);
+                    string searchColChild = dtrWorkSheet["searchcol"].ToString();
+                    string quantityColChild = dtrWorkSheet["quantitycol"].ToString();
+
+                    Console.WriteLine($"Archivo {fileToProcess} - Hoja: {workSheet}");
+
+                    filePath = sPath + "\\" + fileToProcess + ".xls";
+
+                }
+
+                /*
                 workSheet = childFiles.Rows[i]["worksheet"].ToString(); //<<-- Here is where I assign the worksheet
                 workSheet = workSheet.Substring(0, workSheet.Length - 1);
                 string searchColChild = (string)childFiles.Rows[i]["searchcol"];
@@ -150,7 +170,9 @@ namespace mergeExcelFiles
                 Marshal.ReleaseComObject(xlWorkSheetChild);
                 Marshal.ReleaseComObject(xlWorkBookChild);
                 Marshal.ReleaseComObject(xlAppChild);
+                */
             }
+            
             xlWorkBook.Save();
 
             xlWorkBook.Close(true);
@@ -178,13 +200,24 @@ namespace mergeExcelFiles
 
         public static DataTable getFileDefinition(int masterFileId)
         {
-            OleDbConnection strConnection = new OleDbConnection(dbAccess.getConnectionString());
-            OleDbCommand strQuery = new OleDbCommand("select f.tittle, f.filename, (select count(*) from worksheet w where w.filedefinition_id = f.id) as worksheets, f.initrow, f.endrow from filedefinition f where f.master_id=@master_id order by f.id", strConnection);
+            OleDbConnection strConnection = new OleDbConnection(getConnectionString());
+            OleDbCommand strQuery = new OleDbCommand("select f.id, f.tittle, f.filename, (select count(*) from worksheet w where w.filedefinition_id = f.id) as worksheets, f.initrow, f.endrow from filedefinition f where f.master_id=@master_id order by f.id", strConnection);
             strQuery.Parameters.AddWithValue("@master_id", masterFileId);
             OleDbDataAdapter dadFileDefinition = new OleDbDataAdapter(strQuery);
             DataTable dttFileDefinition = new DataTable();
             dadFileDefinition.Fill(dttFileDefinition);
             return dttFileDefinition;
+        }
+
+        public static DataTable getWorkSheets(int fileDefinitionId)
+        {
+            OleDbConnection strConnection = new OleDbConnection(getConnectionString());
+            OleDbCommand strQuery = new OleDbCommand("select worksheet, quantitycol, searchcol from worksheet where filedefinition_id=@filedefinitionid", strConnection);
+            strQuery.Parameters.AddWithValue("@filedefinitionid", fileDefinitionId);
+            OleDbDataAdapter dadWorkSheets = new OleDbDataAdapter(strQuery);
+            DataTable dttWorkSheets = new DataTable();
+            dadWorkSheets.Fill(dttWorkSheets);
+            return dttWorkSheets;
         }
     }
 }

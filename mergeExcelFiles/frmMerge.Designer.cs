@@ -47,6 +47,7 @@
             this.excelFilesDataSet = new mergeExcelFiles.excelFilesDataSet();
             this.configDataTableAdapter = new mergeExcelFiles.excelFilesDataSetTableAdapters.configDataTableAdapter();
             this.pgbMergeFiles = new System.Windows.Forms.ProgressBar();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -166,6 +167,7 @@
             this.dgvFileDefinition.AllowUserToDeleteRows = false;
             this.dgvFileDefinition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFileDefinition.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
             this.tittle,
             this.filename,
             this.worksheet,
@@ -218,6 +220,14 @@
             this.pgbMergeFiles.Name = "pgbMergeFiles";
             this.pgbMergeFiles.Size = new System.Drawing.Size(661, 23);
             this.pgbMergeFiles.TabIndex = 4;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
             // 
             // tittle
             // 
@@ -300,6 +310,7 @@
         private System.Windows.Forms.BindingSource configDataBindingSource;
         private excelFilesDataSetTableAdapters.configDataTableAdapter configDataTableAdapter;
         private System.Windows.Forms.ProgressBar pgbMergeFiles;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn tittle;
         private System.Windows.Forms.DataGridViewTextBoxColumn filename;
         private System.Windows.Forms.DataGridViewTextBoxColumn worksheet;
