@@ -41,19 +41,17 @@
             this.txtProjectPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvFileDefinition = new System.Windows.Forms.DataGridView();
-            this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.filename = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.initrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantitycol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.searchcol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.cboMasterFile = new System.Windows.Forms.ComboBox();
             this.configDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.excelFilesDataSet = new mergeExcelFiles.excelFilesDataSet();
             this.configDataTableAdapter = new mergeExcelFiles.excelFilesDataSetTableAdapters.configDataTableAdapter();
             this.pgbMergeFiles = new System.Windows.Forms.ProgressBar();
+            this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.filename = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.initrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileDefinition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configDataBindingSource)).BeginInit();
@@ -172,65 +170,12 @@
             this.filename,
             this.worksheet,
             this.initrow,
-            this.endrow,
-            this.quantitycol,
-            this.searchcol});
+            this.endrow});
             this.dgvFileDefinition.Location = new System.Drawing.Point(12, 165);
             this.dgvFileDefinition.Name = "dgvFileDefinition";
             this.dgvFileDefinition.ReadOnly = true;
             this.dgvFileDefinition.Size = new System.Drawing.Size(661, 327);
             this.dgvFileDefinition.TabIndex = 1;
-            // 
-            // tittle
-            // 
-            this.tittle.DataPropertyName = "tittle";
-            this.tittle.HeaderText = "Descripción";
-            this.tittle.Name = "tittle";
-            this.tittle.ReadOnly = true;
-            // 
-            // filename
-            // 
-            this.filename.DataPropertyName = "filename";
-            this.filename.HeaderText = "Archivo";
-            this.filename.Name = "filename";
-            this.filename.ReadOnly = true;
-            // 
-            // worksheet
-            // 
-            this.worksheet.DataPropertyName = "worksheet";
-            this.worksheet.HeaderText = "Hoja";
-            this.worksheet.Name = "worksheet";
-            this.worksheet.ReadOnly = true;
-            // 
-            // initrow
-            // 
-            this.initrow.DataPropertyName = "initrow";
-            this.initrow.HeaderText = "Inicio";
-            this.initrow.Name = "initrow";
-            this.initrow.ReadOnly = true;
-            // 
-            // endrow
-            // 
-            this.endrow.DataPropertyName = "endrow";
-            this.endrow.HeaderText = "Final";
-            this.endrow.Name = "endrow";
-            this.endrow.ReadOnly = true;
-            // 
-            // quantitycol
-            // 
-            this.quantitycol.DataPropertyName = "quantitycol";
-            this.quantitycol.HeaderText = "Col_Cantidad";
-            this.quantitycol.Name = "quantitycol";
-            this.quantitycol.ReadOnly = true;
-            this.quantitycol.Visible = false;
-            // 
-            // searchcol
-            // 
-            this.searchcol.DataPropertyName = "searchcol";
-            this.searchcol.HeaderText = "Col_Busqueda";
-            this.searchcol.Name = "searchcol";
-            this.searchcol.ReadOnly = true;
-            this.searchcol.Visible = false;
             // 
             // label4
             // 
@@ -273,6 +218,41 @@
             this.pgbMergeFiles.Name = "pgbMergeFiles";
             this.pgbMergeFiles.Size = new System.Drawing.Size(661, 23);
             this.pgbMergeFiles.TabIndex = 4;
+            // 
+            // tittle
+            // 
+            this.tittle.DataPropertyName = "tittle";
+            this.tittle.HeaderText = "Descripción";
+            this.tittle.Name = "tittle";
+            this.tittle.ReadOnly = true;
+            // 
+            // filename
+            // 
+            this.filename.DataPropertyName = "filename";
+            this.filename.HeaderText = "Archivo";
+            this.filename.Name = "filename";
+            this.filename.ReadOnly = true;
+            // 
+            // worksheet
+            // 
+            this.worksheet.DataPropertyName = "worksheets";
+            this.worksheet.HeaderText = "Hojas";
+            this.worksheet.Name = "worksheet";
+            this.worksheet.ReadOnly = true;
+            // 
+            // initrow
+            // 
+            this.initrow.DataPropertyName = "initrow";
+            this.initrow.HeaderText = "Inicio";
+            this.initrow.Name = "initrow";
+            this.initrow.ReadOnly = true;
+            // 
+            // endrow
+            // 
+            this.endrow.DataPropertyName = "endrow";
+            this.endrow.HeaderText = "Final";
+            this.endrow.Name = "endrow";
+            this.endrow.ReadOnly = true;
             // 
             // frmMerge
             // 
@@ -319,14 +299,12 @@
         private excelFilesDataSet excelFilesDataSet;
         private System.Windows.Forms.BindingSource configDataBindingSource;
         private excelFilesDataSetTableAdapters.configDataTableAdapter configDataTableAdapter;
+        private System.Windows.Forms.ProgressBar pgbMergeFiles;
         private System.Windows.Forms.DataGridViewTextBoxColumn tittle;
         private System.Windows.Forms.DataGridViewTextBoxColumn filename;
         private System.Windows.Forms.DataGridViewTextBoxColumn worksheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn initrow;
         private System.Windows.Forms.DataGridViewTextBoxColumn endrow;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantitycol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn searchcol;
-        private System.Windows.Forms.ProgressBar pgbMergeFiles;
     }
 }
 

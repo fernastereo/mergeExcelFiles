@@ -89,11 +89,12 @@ namespace mergeExcelFiles
             {
                 //Get the child filename and replace the XXX by project prefix
                 fileToProcess = childFiles.Rows[i]["filename"].ToString().ToUpper().Replace(BASE_PREFIX, projectPrefix);
-                workSheet = childFiles.Rows[i]["worksheet"].ToString();
-                workSheet = workSheet.Substring(0, workSheet.Length - 1);
                 //get the rows for the master file
                 initRow = (int)childFiles.Rows[i]["initrow"];
                 endRow = (int)childFiles.Rows[i]["endrow"];
+
+                workSheet = childFiles.Rows[i]["worksheet"].ToString(); //<<-- Here is where I assign the worksheet
+                workSheet = workSheet.Substring(0, workSheet.Length - 1);
                 string searchColChild = (string)childFiles.Rows[i]["searchcol"];
                 string quantityColChild = (string)childFiles.Rows[i]["quantitycol"];
 
@@ -111,7 +112,7 @@ namespace mergeExcelFiles
                 //for each record from init to end in masterfile
                 //Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
                 for (int rowCount = initRow; rowCount <= endRow; rowCount++)
-                {   
+                {
                     //get the code we will look for in master file
                     searchCode = Convert.ToString((xlRange.Cells[rowCount, 1] as masterFileExcel.Range).Text);
 
@@ -138,7 +139,6 @@ namespace mergeExcelFiles
                             xlWorkSheet.Cells[rowCount, qCol] = "";
                             //searchCode = string.Concat("-- Not Found-- ", searchCode);
                         }
-
                         //Console.WriteLine(searchCode);
                     }
                 }
@@ -179,7 +179,7 @@ namespace mergeExcelFiles
         public static DataTable getFileDefinition(int masterFileId)
         {
             OleDbConnection strConnection = new OleDbConnection(dbAccess.getConnectionString());
-            OleDbCommand strQuery = new OleDbCommand("select f.tittle, f.filename, w.worksheet, f.initrow, f.endrow, w.quantitycol, w.searchcol from filedefinition f, worksheet w where f.id=w.filedefinition_id and f.master_id=@master_id order by f.id, w.id", strConnection);
+            OleDbCommand strQuery = new OleDbCommand("select f.tittle, f.filename, (select count(*) from worksheet w where w.filedefinition_id = f.id) as worksheets, f.initrow, f.endrow from filedefinition f where f.master_id=@master_id order by f.id", strConnection);
             strQuery.Parameters.AddWithValue("@master_id", masterFileId);
             OleDbDataAdapter dadFileDefinition = new OleDbDataAdapter(strQuery);
             DataTable dttFileDefinition = new DataTable();
