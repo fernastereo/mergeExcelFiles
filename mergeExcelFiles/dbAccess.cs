@@ -75,6 +75,7 @@ namespace mergeExcelFiles
             //Open master file:
             string filePath = sPath + "\\" + masterFile;
             masterFileExcel.Application xlApp = new masterFileExcel.Application();
+
             //I Must catch a exception here when the file doesn't exits in folder------>>>>
             masterFileExcel.Workbook xlWorkBook = xlApp.Workbooks.Open(filePath);
             masterFileExcel.Worksheet xlWorkSheet = (masterFileExcel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
@@ -94,10 +95,21 @@ namespace mergeExcelFiles
                 fileDefinitionId = (int)childFiles.Rows[i]["id"];
                 initRow = (int)childFiles.Rows[i]["initrow"];
                 endRow = (int)childFiles.Rows[i]["endrow"];
+                string qCol = _quantityCol(); //quantityCol for the master file
 
-                //Before get the worksheets we must open the file here!!!!
+                //First blank cells
+                for (int rowCount = initRow; rowCount <= endRow; rowCount++)
+                {
+                    xlWorkSheet.Cells[rowCount, qCol] = "";
+                }
 
+                //Before get the worksheets we must open the file, so get the fullpath for the child file
+                filePath = sPath + "\\" + fileToProcess + ".xls";
+                //Open the child file:
+                childFileExcel.Application xlAppChild = new childFileExcel.Application();
+                childFileExcel.Workbook xlWorkBookChild = xlAppChild.Workbooks.Open(filePath);
 
+                //Here I get all the sheets for every child file and process it
                 DataTable dttWorkSheets = getWorkSheets(fileDefinitionId);
                 foreach (DataRow dtrWorkSheet in dttWorkSheets.Rows)
                 {
@@ -108,69 +120,54 @@ namespace mergeExcelFiles
 
                     Console.WriteLine($"Archivo {fileToProcess} - Hoja: {workSheet}");
 
-                    filePath = sPath + "\\" + fileToProcess + ".xls";
+                    childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];
+                    //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
+                    childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns[searchColChild];
 
-                }
 
-                /*
-                workSheet = childFiles.Rows[i]["worksheet"].ToString(); //<<-- Here is where I assign the worksheet
-                workSheet = workSheet.Substring(0, workSheet.Length - 1);
-                string searchColChild = (string)childFiles.Rows[i]["searchcol"];
-                string quantityColChild = (string)childFiles.Rows[i]["quantitycol"];
-
-                //get the fullpath for the child file
-                filePath = sPath + "\\" + fileToProcess + ".xls";
-                //Open the child file:
-                childFileExcel.Application xlAppChild = new childFileExcel.Application();
-                childFileExcel.Workbook xlWorkBookChild = xlAppChild.Workbooks.Open(filePath);
-                childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];
-                //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
-                childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns[searchColChild];
-
-                string qCol = _quantityCol();
-
-                //for each record from init to end in masterfile
-                //Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
-                for (int rowCount = initRow; rowCount <= endRow; rowCount++)
-                {
-                    //get the code we will look for in master file
-                    searchCode = Convert.ToString((xlRange.Cells[rowCount, 1] as masterFileExcel.Range).Text);
-
-                    if (!string.IsNullOrEmpty(searchCode) && searchCode.Length > 1)
+                    //for each record from init to end in masterfile
+                    //Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
+                    for (int rowCount = initRow; rowCount <= endRow; rowCount++)
                     {
-                        // search searchString in the range, if find result, return a range
-                        childFileExcel.Range resultRange = xlRangeChild.Find(
-                            What: searchCode,
-                            LookIn: childFileExcel.XlFindLookIn.xlValues,
-                            LookAt: childFileExcel.XlLookAt.xlPart,
-                            SearchOrder: childFileExcel.XlSearchOrder.xlByRows,
-                            SearchDirection: childFileExcel.XlSearchDirection.xlNext
-                        );
-                        if (resultRange != null)
+                        //get the code we will look for in master file
+                        searchCode = Convert.ToString((xlRange.Cells[rowCount, 1] as masterFileExcel.Range).Text);
+
+                        if (!string.IsNullOrEmpty(searchCode) && searchCode.Length > 1)
                         {
-                            int rowResult = resultRange.Row;                            
-                            
-                            string childValue = Convert.ToString((xlWorkSheetChild.Cells[rowResult, quantityColChild] as masterFileExcel.Range).Text);
-                            xlWorkSheet.Cells[rowCount, qCol] = childValue;
-                            //searchCode = string.Concat("***** OK! ***** ", searchCode, " En la fila: ", rowResult);
+                            // search searchString in the range, if find result, return a range
+                            childFileExcel.Range resultRange = xlRangeChild.Find(
+                                What: searchCode,
+                                LookIn: childFileExcel.XlFindLookIn.xlValues,
+                                LookAt: childFileExcel.XlLookAt.xlPart,
+                                SearchOrder: childFileExcel.XlSearchOrder.xlByRows,
+                                SearchDirection: childFileExcel.XlSearchDirection.xlNext
+                            );
+                            if (resultRange != null)
+                            {
+                                int rowResult = resultRange.Row;
+
+                                string childValue = Convert.ToString((xlWorkSheetChild.Cells[rowResult, quantityColChild] as masterFileExcel.Range).Text);
+                                xlWorkSheet.Cells[rowCount, qCol] = childValue;
+                                //searchCode = string.Concat("***** OK! ***** ", searchCode, " En la fila: ", rowResult);
+                            }
+                            //else
+                            //{
+                            //    xlWorkSheet.Cells[rowCount, qCol] = "";
+                            //    //searchCode = string.Concat("-- Not Found-- ", searchCode);
+                            //}
+                            //Console.WriteLine(searchCode);
                         }
-                        else
-                        {
-                            xlWorkSheet.Cells[rowCount, qCol] = "";
-                            //searchCode = string.Concat("-- Not Found-- ", searchCode);
-                        }
-                        //Console.WriteLine(searchCode);
                     }
+
+                    Marshal.ReleaseComObject(xlWorkSheetChild);
                 }
 
                 //close the child file:
                 xlWorkBookChild.Close(false);
                 xlAppChild.Quit();
 
-                Marshal.ReleaseComObject(xlWorkSheetChild);
                 Marshal.ReleaseComObject(xlWorkBookChild);
                 Marshal.ReleaseComObject(xlAppChild);
-                */
             }
             
             xlWorkBook.Save();
