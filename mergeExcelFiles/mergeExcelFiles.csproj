@@ -63,6 +63,7 @@
     <Compile Include="frmMerge.Designer.cs">
       <DependentUpon>frmMerge.cs</DependentUpon>
     </Compile>
+    <Compile Include="PosicEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMerge.resx">

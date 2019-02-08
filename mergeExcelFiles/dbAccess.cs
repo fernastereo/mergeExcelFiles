@@ -16,9 +16,12 @@ namespace mergeExcelFiles
     {
         public const string BASE_PREFIX = "XXX";
 
+        private int _final;          // Valor de finalización
+
         private string _prefix;
         private string _masterFile;
         private int _masterFileId;
+        private DataTable _childFiles;
 
         public string masterFile {
             get {
@@ -59,13 +62,30 @@ namespace mergeExcelFiles
             _masterFileId = masterFileId;
         }
 
-        public dbAccess(int masterFileId)
+        public dbAccess(DataTable childFiles, int masterFileId)
         {
             _prefix = "";
             _masterFileId = masterFileId;
+            _childFiles = childFiles;
+            _final = _childFiles.Rows.Count;
         }
 
-        public Boolean mergeData(string sPath, string masterFile, DataTable childFiles, string projectPrefix)
+        public delegate void cambioPosHandler(object o, PosicEventArgs ev);
+
+        public event cambioPosHandler cambioPosic;
+
+        protected virtual void onCambioPosic(PosicEventArgs e)
+        {
+            if (cambioPosic != null)
+                cambioPosic(this, e); //invocacion del delegado
+        }
+
+        public int Final
+        {
+            get { return _final; }
+        }
+
+        public void mergeData(string sPath, string masterFile, string projectPrefix)
         {
             int fileDefinitionId = 0;
             int initRow = 0;
@@ -83,18 +103,19 @@ namespace mergeExcelFiles
             masterFileExcel.Range xlRange = xlWorkSheet.UsedRange;
 
             //for each child file in gridView:
-            int n = childFiles.Rows.Count;
+            int n = _final;
             string searchCode;
             string workSheet;
 
             for (int i = 0; i < n; i++)
             {
+                onCambioPosic(new PosicEventArgs(i));
                 //Get the child filename and replace the XXX by project prefix
-                fileToProcess = childFiles.Rows[i]["filename"].ToString().ToUpper().Replace(BASE_PREFIX, projectPrefix);
+                fileToProcess = _childFiles.Rows[i]["filename"].ToString().ToUpper().Replace(BASE_PREFIX, projectPrefix);
                 //get the rows for the master file
-                fileDefinitionId = (int)childFiles.Rows[i]["id"];
-                initRow = (int)childFiles.Rows[i]["initrow"];
-                endRow = (int)childFiles.Rows[i]["endrow"];
+                fileDefinitionId = (int)_childFiles.Rows[i]["id"];
+                initRow = (int)_childFiles.Rows[i]["initrow"];
+                endRow = (int)_childFiles.Rows[i]["endrow"];
                 string qCol = _quantityCol(); //quantityCol for the master file
 
                 //First blank cells
@@ -180,8 +201,6 @@ namespace mergeExcelFiles
             Marshal.ReleaseComObject(xlApp);
 
             killExcel();
-
-            return true;
         }
 
         private void killExcel()

@@ -50,11 +50,17 @@ namespace mergeExcelFiles
         private void btnStartTask_Click(object sender, EventArgs e)
         {
             int master_id = (int)cboMasterFile.SelectedValue;
-            dbAccess DB = new dbAccess(master_id);
-            
-            bool result = DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, _dttExcelFiles, txtProjectPrefix.Text);
+            dbAccess DB = new dbAccess(_dttExcelFiles, master_id);
+            pgbMergeFiles.Minimum = 0;
+            pgbMergeFiles.Maximum = DB.Final;
+            DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, txtProjectPrefix.Text);
+            DB.cambioPosic += new dbAccess.cambioPosHandler(DB_cambioPosic);
+            MessageBox.Show("Proceso finalizado");
+        }
 
-            MessageBox.Show(result.ToString());
+        private void DB_cambioPosic(object o, PosicEventArgs ev)
+        {
+            pgbMergeFiles.Value = ev.posic;
         }
 
         private void cboMasterFile_SelectionChangeCommitted(object sender, EventArgs e)
