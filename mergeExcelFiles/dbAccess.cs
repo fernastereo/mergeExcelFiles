@@ -114,7 +114,7 @@ namespace mergeExcelFiles
                 fileToProcess = _childFiles.Rows[i]["filename"].ToString().ToUpper().Replace(BASE_PREFIX, projectPrefix);
                 //get the rows for the master file
                 fileDefinitionId = (int)_childFiles.Rows[i]["id"];
-                startRow = (int)_childFiles.Rows[i]["initrow"];
+                startRow = (int)_childFiles.Rows[i]["startrow"];
                 endRow = (int)_childFiles.Rows[i]["endrow"];
                 string qCol = _quantityCol(); //quantityCol for the master file
 
@@ -129,6 +129,8 @@ namespace mergeExcelFiles
 
                 //Here I get all the sheets for every child file and process it
                 DataTable dttWorkSheets = getWorkSheets(fileDefinitionId);
+
+                //Process each worksheet in xlsFile
                 foreach (DataRow dtrWorkSheet in dttWorkSheets.Rows)
                 {
                     workSheet = dtrWorkSheet["worksheet"].ToString(); //<<-- Here is where I assign the worksheet
@@ -166,14 +168,8 @@ namespace mergeExcelFiles
 
                                 string childValue = Convert.ToString((xlWorkSheetChild.Cells[rowResult, quantityColChild] as masterFileExcel.Range).Text);
                                 xlWorkSheet.Cells[rowCount, qCol] = childValue;
-                                //searchCode = string.Concat("***** OK! ***** ", searchCode, " En la fila: ", rowResult);
                             }
-                            //else
-                            //{
-                            //    xlWorkSheet.Cells[rowCount, qCol] = "";
-                            //    //searchCode = string.Concat("-- Not Found-- ", searchCode);
-                            //}
-                            //Console.WriteLine(searchCode);
+                            
                         }
                     }
 
@@ -189,7 +185,6 @@ namespace mergeExcelFiles
             }
             
             xlWorkBook.Save();
-
             xlWorkBook.Close(true);
             xlApp.Quit();
 
@@ -214,7 +209,7 @@ namespace mergeExcelFiles
         public static DataTable getFileDefinition(int masterFileId)
         {
             OleDbConnection strConnection = new OleDbConnection(getConnectionString());
-            OleDbCommand strQuery = new OleDbCommand("select f.id, f.tittle, f.filename, (select count(*) from worksheet w where w.filedefinition_id = f.id) as worksheets, f.initrow, f.endrow from filedefinition f where f.master_id=@master_id order by f.id", strConnection);
+            OleDbCommand strQuery = new OleDbCommand("select f.id, f.tittle, f.filename, (select count(*) from worksheet w where w.filedefinition_id = f.id) as worksheets, f.startrow, f.endrow from filedefinition f where f.master_id=@master_id order by f.id", strConnection);
             strQuery.Parameters.AddWithValue("@master_id", masterFileId);
             OleDbDataAdapter dadFileDefinition = new OleDbDataAdapter(strQuery);
             DataTable dttFileDefinition = new DataTable();
@@ -222,7 +217,7 @@ namespace mergeExcelFiles
             return dttFileDefinition;
         }
 
-        public static DataTable getWorkSheets(int fileDefinitionId)
+        private static DataTable getWorkSheets(int fileDefinitionId)
         {
             OleDbConnection strConnection = new OleDbConnection(getConnectionString());
             OleDbCommand strQuery = new OleDbCommand("select worksheet, quantitycol, searchcol from worksheet where filedefinition_id=@filedefinitionid", strConnection);

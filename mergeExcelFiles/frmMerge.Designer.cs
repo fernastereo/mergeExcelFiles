@@ -41,12 +41,6 @@
             this.txtProjectPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvFileDefinition = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.filename = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.initrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.cboMasterFile = new System.Windows.Forms.ComboBox();
             this.configDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -55,6 +49,12 @@
             this.pgbMergeFiles = new System.Windows.Forms.ProgressBar();
             this.lblProgress = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.filename = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.initrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileDefinition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configDataBindingSource)).BeginInit();
@@ -182,49 +182,6 @@
             this.dgvFileDefinition.TabIndex = 1;
             this.dgvFileDefinition.Visible = false;
             // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // tittle
-            // 
-            this.tittle.DataPropertyName = "tittle";
-            this.tittle.HeaderText = "Descripción";
-            this.tittle.Name = "tittle";
-            this.tittle.ReadOnly = true;
-            // 
-            // filename
-            // 
-            this.filename.DataPropertyName = "filename";
-            this.filename.HeaderText = "Archivo";
-            this.filename.Name = "filename";
-            this.filename.ReadOnly = true;
-            // 
-            // worksheet
-            // 
-            this.worksheet.DataPropertyName = "worksheets";
-            this.worksheet.HeaderText = "Hojas";
-            this.worksheet.Name = "worksheet";
-            this.worksheet.ReadOnly = true;
-            // 
-            // initrow
-            // 
-            this.initrow.DataPropertyName = "initrow";
-            this.initrow.HeaderText = "Inicio";
-            this.initrow.Name = "initrow";
-            this.initrow.ReadOnly = true;
-            // 
-            // endrow
-            // 
-            this.endrow.DataPropertyName = "endrow";
-            this.endrow.HeaderText = "Final";
-            this.endrow.Name = "endrow";
-            this.endrow.ReadOnly = true;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -287,11 +244,54 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // tittle
+            // 
+            this.tittle.DataPropertyName = "tittle";
+            this.tittle.HeaderText = "Descripción";
+            this.tittle.Name = "tittle";
+            this.tittle.ReadOnly = true;
+            // 
+            // filename
+            // 
+            this.filename.DataPropertyName = "filename";
+            this.filename.HeaderText = "Archivo";
+            this.filename.Name = "filename";
+            this.filename.ReadOnly = true;
+            // 
+            // worksheet
+            // 
+            this.worksheet.DataPropertyName = "worksheets";
+            this.worksheet.HeaderText = "Hojas";
+            this.worksheet.Name = "worksheet";
+            this.worksheet.ReadOnly = true;
+            // 
+            // initrow
+            // 
+            this.initrow.DataPropertyName = "startrow";
+            this.initrow.HeaderText = "Inicio";
+            this.initrow.Name = "initrow";
+            this.initrow.ReadOnly = true;
+            // 
+            // endrow
+            // 
+            this.endrow.DataPropertyName = "endrow";
+            this.endrow.HeaderText = "Final";
+            this.endrow.Name = "endrow";
+            this.endrow.ReadOnly = true;
+            // 
             // frmMerge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 235);
+            this.ClientSize = new System.Drawing.Size(655, 232);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.pgbMergeFiles);
@@ -335,14 +335,14 @@
         private System.Windows.Forms.BindingSource configDataBindingSource;
         private excelFilesDataSetTableAdapters.configDataTableAdapter configDataTableAdapter;
         private System.Windows.Forms.ProgressBar pgbMergeFiles;
+        private System.Windows.Forms.Label lblProgress;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn tittle;
         private System.Windows.Forms.DataGridViewTextBoxColumn filename;
         private System.Windows.Forms.DataGridViewTextBoxColumn worksheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn initrow;
         private System.Windows.Forms.DataGridViewTextBoxColumn endrow;
-        private System.Windows.Forms.Label lblProgress;
-        private System.Windows.Forms.Button btnExit;
     }
 }
 
