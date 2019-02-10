@@ -55,7 +55,7 @@ namespace mergeExcelFiles
             pgbMergeFiles.Maximum = DB.Final;
             DB.cambioPosic += new dbAccess.cambioPosHandler(DB_cambioPosic);
             DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, txtProjectPrefix.Text);
-            MessageBox.Show("Proceso finalizado");
+            MessageBox.Show(DB.errMsg);
             pgbMergeFiles.Visible = false;
             lblProgress.Visible = false;
         }

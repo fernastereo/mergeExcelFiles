@@ -23,6 +23,13 @@ namespace mergeExcelFiles
         private int _masterFileId;
         private DataTable _childFiles;
 
+        private string _errMsg;
+
+        public string errMsg
+        {
+            get { return _errMsg; }
+        }
+
         public string masterFile {
             get {
                 _masterFile = "";
@@ -97,6 +104,11 @@ namespace mergeExcelFiles
             masterFileExcel.Application xlApp = new masterFileExcel.Application();
 
             //I Must catch a exception here when the file doesn't exits in folder------>>>>
+            if (!System.IO.File.Exists(filePath))
+            {
+                _errMsg = "El archivo maestro no existe en la ruta especificada";
+                return;
+            }
             masterFileExcel.Workbook xlWorkBook = xlApp.Workbooks.Open(filePath);
             masterFileExcel.Worksheet xlWorkSheet = (masterFileExcel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
@@ -118,7 +130,7 @@ namespace mergeExcelFiles
                 endRow = (int)_childFiles.Rows[i]["endrow"];
                 string qCol = _quantityCol(); //quantityCol for the master file
 
-                //First blank cells
+                //First blank the cells are going to be updated
                 blankCells(startRow, endRow, qCol, xlWorkSheet);
 
                 //Before get the worksheets we must open the file, so get the fullpath for the child file
@@ -144,9 +156,7 @@ namespace mergeExcelFiles
                     //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
                     childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns[searchColChild];
 
-
                     //for each record from init to end in masterfile
-                    //Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
                     for (int rowCount = startRow; rowCount <= endRow; rowCount++)
                     {
                         //get the code we will look for in master file
@@ -169,13 +179,10 @@ namespace mergeExcelFiles
                                 string childValue = Convert.ToString((xlWorkSheetChild.Cells[rowResult, quantityColChild] as masterFileExcel.Range).Text);
                                 xlWorkSheet.Cells[rowCount, qCol] = childValue;
                             }
-                            
                         }
                     }
-
                     Marshal.ReleaseComObject(xlWorkSheetChild);
                 }
-
                 //close the child file:
                 xlWorkBookChild.Close(false);
                 xlAppChild.Quit();
@@ -183,7 +190,6 @@ namespace mergeExcelFiles
                 Marshal.ReleaseComObject(xlWorkBookChild);
                 Marshal.ReleaseComObject(xlAppChild);
             }
-            
             xlWorkBook.Save();
             xlWorkBook.Close(true);
             xlApp.Quit();
@@ -193,6 +199,7 @@ namespace mergeExcelFiles
             Marshal.ReleaseComObject(xlApp);
 
             killExcel();
+            _errMsg = "Proceso finalizado satisfactoriamente";
         }
 
         private void killExcel()
