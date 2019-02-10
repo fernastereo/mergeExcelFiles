@@ -49,6 +49,10 @@ namespace mergeExcelFiles
 
         private void btnStartTask_Click(object sender, EventArgs e)
         {
+            pgbMergeFiles.Visible = true;
+            lblProgress.Visible = true;
+            btnStartTask.Enabled = false;
+            btnExit.Enabled = false;
             int master_id = (int)cboMasterFile.SelectedValue;
             dbAccess DB = new dbAccess(_dttExcelFiles, master_id);
             pgbMergeFiles.Minimum = 0;
@@ -58,12 +62,14 @@ namespace mergeExcelFiles
             MessageBox.Show(DB.errMsg);
             pgbMergeFiles.Visible = false;
             lblProgress.Visible = false;
+            btnStartTask.Enabled = true;
+            btnExit.Enabled = true;
         }
 
         private void DB_cambioPosic(object o, PosicEventArgs ev)
         {
             pgbMergeFiles.Value = ev.posic;
-            lblProgress.Text = $"Compilando Archivo {ev.posic} de {pgbMergeFiles.Maximum}";
+            lblProgress.Text = $"Compilando Archivo {_dttExcelFiles.Rows[ev.posic - 1]["filename"]} - ({ev.posic} de {pgbMergeFiles.Maximum})";
         }
 
         private void cboMasterFile_SelectionChangeCommitted(object sender, EventArgs e)
