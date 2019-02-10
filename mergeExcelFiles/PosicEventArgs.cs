@@ -12,7 +12,7 @@ namespace mergeExcelFiles
 
         public PosicEventArgs(int pos):base()
         {
-            posic = pos;
+            posic = pos + 1;
         }
     }
 }
