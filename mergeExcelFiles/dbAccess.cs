@@ -88,7 +88,7 @@ namespace mergeExcelFiles
         public void mergeData(string sPath, string masterFile, string projectPrefix)
         {
             int fileDefinitionId = 0;
-            int initRow = 0;
+            int startRow = 0;
             int endRow = 0;
             string fileToProcess = "";
             
@@ -114,15 +114,12 @@ namespace mergeExcelFiles
                 fileToProcess = _childFiles.Rows[i]["filename"].ToString().ToUpper().Replace(BASE_PREFIX, projectPrefix);
                 //get the rows for the master file
                 fileDefinitionId = (int)_childFiles.Rows[i]["id"];
-                initRow = (int)_childFiles.Rows[i]["initrow"];
+                startRow = (int)_childFiles.Rows[i]["initrow"];
                 endRow = (int)_childFiles.Rows[i]["endrow"];
                 string qCol = _quantityCol(); //quantityCol for the master file
 
                 //First blank cells
-                for (int rowCount = initRow; rowCount <= endRow; rowCount++)
-                {
-                    xlWorkSheet.Cells[rowCount, qCol] = "";
-                }
+                blankCells(startRow, endRow, qCol, xlWorkSheet);
 
                 //Before get the worksheets we must open the file, so get the fullpath for the child file
                 filePath = sPath + "\\" + fileToProcess + ".xls";
@@ -148,7 +145,7 @@ namespace mergeExcelFiles
 
                     //for each record from init to end in masterfile
                     //Console.WriteLine($"Procesando el archivo {fileToProcess} - Hoja: {workSheet}");
-                    for (int rowCount = initRow; rowCount <= endRow; rowCount++)
+                    for (int rowCount = startRow; rowCount <= endRow; rowCount++)
                     {
                         //get the code we will look for in master file
                         searchCode = Convert.ToString((xlRange.Cells[rowCount, 1] as masterFileExcel.Range).Text);
@@ -234,6 +231,14 @@ namespace mergeExcelFiles
             DataTable dttWorkSheets = new DataTable();
             dadWorkSheets.Fill(dttWorkSheets);
             return dttWorkSheets;
+        }
+
+        private void blankCells(int start, int end, string qCol, masterFileExcel.Worksheet workSheet)
+        {
+            for (int rowCount = start; rowCount <= end; rowCount++)
+            {
+                workSheet.Cells[rowCount, qCol] = "";
+            }
         }
     }
 }

@@ -56,11 +56,14 @@ namespace mergeExcelFiles
             DB.cambioPosic += new dbAccess.cambioPosHandler(DB_cambioPosic);
             DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, txtProjectPrefix.Text);
             MessageBox.Show("Proceso finalizado");
+            pgbMergeFiles.Visible = false;
+            lblProgress.Visible = false;
         }
 
         private void DB_cambioPosic(object o, PosicEventArgs ev)
         {
             pgbMergeFiles.Value = ev.posic;
+            lblProgress.Text = $"Compilando Archivo {ev.posic} de {pgbMergeFiles.Maximum}";
         }
 
         private void cboMasterFile_SelectionChangeCommitted(object sender, EventArgs e)
@@ -68,6 +71,11 @@ namespace mergeExcelFiles
             int master_id = (int)cboMasterFile.SelectedValue;
             _dttExcelFiles = dbAccess.getFileDefinition(master_id);
             dgvFileDefinition.DataSource = _dttExcelFiles;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
