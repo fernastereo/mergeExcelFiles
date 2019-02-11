@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace mergeExcelFiles
 {
-    class dbAccess
+    class merge
     {
         public const string BASE_PREFIX = "XXX";
 

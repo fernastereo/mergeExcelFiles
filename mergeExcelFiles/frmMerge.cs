@@ -36,8 +36,8 @@ namespace mergeExcelFiles
                 txtProjectPrefix.Text = folderName;
 
                 int master_id = (int)cboMasterFile.SelectedValue;
-                dbAccess DB = new dbAccess(folderName, master_id);
-                txtMasterFile.Text = DB.masterFile;
+                merge task = new merge(folderName, master_id);
+                txtMasterFile.Text = task.masterFile;
             }
         }
 
@@ -54,12 +54,12 @@ namespace mergeExcelFiles
             btnStartTask.Enabled = false;
             btnExit.Enabled = false;
             int master_id = (int)cboMasterFile.SelectedValue;
-            dbAccess DB = new dbAccess(_dttExcelFiles, master_id);
+            merge task = new merge(_dttExcelFiles, master_id);
             pgbMergeFiles.Minimum = 0;
-            pgbMergeFiles.Maximum = DB.Final;
-            DB.cambioPosic += new dbAccess.cambioPosHandler(DB_cambioPosic);
-            DB.mergeData(txtProjectPath.Text, txtMasterFile.Text, txtProjectPrefix.Text);
-            MessageBox.Show(DB.errMsg);
+            pgbMergeFiles.Maximum = task.Final;
+            task.cambioPosic += new merge.cambioPosHandler(DB_cambioPosic);
+            task.mergeData(txtProjectPath.Text, txtMasterFile.Text, txtProjectPrefix.Text);
+            MessageBox.Show(task.errMsg);
             pgbMergeFiles.Visible = false;
             lblProgress.Visible = false;
             btnStartTask.Enabled = true;
@@ -75,7 +75,7 @@ namespace mergeExcelFiles
         private void cboMasterFile_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int master_id = (int)cboMasterFile.SelectedValue;
-            _dttExcelFiles = dbAccess.getFileDefinition(master_id);
+            _dttExcelFiles = merge.getFileDefinition(master_id);
             dgvFileDefinition.DataSource = _dttExcelFiles;
         }
 
