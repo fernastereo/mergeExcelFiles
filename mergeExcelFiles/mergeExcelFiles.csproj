@@ -108,5 +108,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\emailService\emailService.csproj">
+      <Project>{260cde61-f95b-44ef-8908-27ffb1bcbde9}</Project>
+      <Name>emailService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
