@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dbConfig.cs" />
     <Compile Include="merge.cs" />
     <Compile Include="excelFilesDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

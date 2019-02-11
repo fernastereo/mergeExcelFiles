@@ -33,7 +33,7 @@ namespace mergeExcelFiles
         public string masterFile {
             get {
                 _masterFile = "";
-                OleDbDataAdapter dtaMasterfile = new OleDbDataAdapter("select masterfile, quantitycol from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(getConnectionString()));
+                OleDbDataAdapter dtaMasterfile = new OleDbDataAdapter("select masterfile, quantitycol from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(dbConfig.getConnectionString()));
                 DataTable dttMasterFile = new DataTable();
                 dtaMasterfile.Fill(dttMasterFile);
                 if (dttMasterFile.Rows.Count > 0)
@@ -47,7 +47,7 @@ namespace mergeExcelFiles
 
         private string _quantityCol()
         {
-            OleDbDataAdapter dtaQuantityCol = new OleDbDataAdapter("select quantitycol from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(getConnectionString()));
+            OleDbDataAdapter dtaQuantityCol = new OleDbDataAdapter("select quantitycol from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(dbConfig.getConnectionString()));
             DataTable dttQuantityCol = new DataTable();
             dtaQuantityCol.Fill(dttQuantityCol);
             if (dttQuantityCol.Rows.Count > 0)
@@ -58,18 +58,13 @@ namespace mergeExcelFiles
             return "";
         }
 
-        public static string getConnectionString()
-        {
-            return System.Configuration.ConfigurationManager.ConnectionStrings["mergeExcelFiles.Properties.Settings.excelFilesConnectionString"].ConnectionString.ToString();
-        }
-
-        public dbAccess(string prefix, int masterFileId)
+        public merge(string prefix, int masterFileId)
         {
             _prefix = prefix;
             _masterFileId = masterFileId;
         }
 
-        public dbAccess(DataTable childFiles, int masterFileId)
+        public merge(DataTable childFiles, int masterFileId)
         {
             _prefix = "";
             _masterFileId = masterFileId;
@@ -215,7 +210,7 @@ namespace mergeExcelFiles
 
         public static DataTable getFileDefinition(int masterFileId)
         {
-            OleDbConnection strConnection = new OleDbConnection(getConnectionString());
+            OleDbConnection strConnection = new OleDbConnection(dbConfig.getConnectionString());
             OleDbCommand strQuery = new OleDbCommand("select f.id, f.tittle, f.filename, (select count(*) from worksheet w where w.filedefinition_id = f.id) as worksheets, f.startrow, f.endrow from filedefinition f where f.master_id=@master_id order by f.id", strConnection);
             strQuery.Parameters.AddWithValue("@master_id", masterFileId);
             OleDbDataAdapter dadFileDefinition = new OleDbDataAdapter(strQuery);
@@ -226,7 +221,7 @@ namespace mergeExcelFiles
 
         private static DataTable getWorkSheets(int fileDefinitionId)
         {
-            OleDbConnection strConnection = new OleDbConnection(getConnectionString());
+            OleDbConnection strConnection = new OleDbConnection(dbConfig.getConnectionString());
             OleDbCommand strQuery = new OleDbCommand("select worksheet, quantitycol, searchcol from worksheet where filedefinition_id=@filedefinitionid", strConnection);
             strQuery.Parameters.AddWithValue("@filedefinitionid", fileDefinitionId);
             OleDbDataAdapter dadWorkSheets = new OleDbDataAdapter(strQuery);
