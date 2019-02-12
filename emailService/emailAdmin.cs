@@ -12,7 +12,7 @@ namespace mergeExcelFiles
     public class emailAdmin
     {
         private SmtpClient client;
-        private MailMessage mail;
+        private MailMessage email;
         private string _host;
         private int _port;
         private string _user;
@@ -33,6 +33,16 @@ namespace mergeExcelFiles
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(_user, _pass)
             };
+        }
+
+        public void sendEmail(string to, string subject, string body, string fileAttached, bool isHtml = false)
+        {
+            Attachment file;
+            file = new Attachment(fileAttached);
+            email = new MailMessage(_user, to, subject, body);
+            email.IsBodyHtml = isHtml;
+            email.Attachments.Add(file);
+            client.Send(email);
         }
     }
 }
