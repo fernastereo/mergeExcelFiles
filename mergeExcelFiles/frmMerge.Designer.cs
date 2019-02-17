@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMerge));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.chkSendEmail = new System.Windows.Forms.CheckBox();
             this.btnStartTask = new System.Windows.Forms.Button();
             this.imlIcons = new System.Windows.Forms.ImageList(this.components);
             this.txtMasterFile = new System.Windows.Forms.TextBox();
@@ -41,6 +43,12 @@
             this.txtProjectPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvFileDefinition = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.filename = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.initrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.cboMasterFile = new System.Windows.Forms.ComboBox();
             this.configDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -49,12 +57,6 @@
             this.pgbMergeFiles = new System.Windows.Forms.ProgressBar();
             this.lblProgress = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.filename = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.initrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileDefinition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configDataBindingSource)).BeginInit();
@@ -63,6 +65,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtEmail);
+            this.groupBox1.Controls.Add(this.chkSendEmail);
             this.groupBox1.Controls.Add(this.btnStartTask);
             this.groupBox1.Controls.Add(this.txtMasterFile);
             this.groupBox1.Controls.Add(this.label3);
@@ -73,17 +77,35 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 53);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(628, 97);
+            this.groupBox1.Size = new System.Drawing.Size(628, 130);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Carpeta Proyecto";
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
+            this.txtEmail.Location = new System.Drawing.Point(245, 93);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(220, 20);
+            this.txtEmail.TabIndex = 9;
+            // 
+            // chkSendEmail
+            // 
+            this.chkSendEmail.AutoSize = true;
+            this.chkSendEmail.Location = new System.Drawing.Point(19, 96);
+            this.chkSendEmail.Name = "chkSendEmail";
+            this.chkSendEmail.Size = new System.Drawing.Size(227, 17);
+            this.chkSendEmail.TabIndex = 8;
+            this.chkSendEmail.Text = "Enviar por correo al finalizar al destinatario:";
+            this.chkSendEmail.UseVisualStyleBackColor = true;
             // 
             // btnStartTask
             // 
             this.btnStartTask.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnStartTask.ImageIndex = 4;
             this.btnStartTask.ImageList = this.imlIcons;
-            this.btnStartTask.Location = new System.Drawing.Point(482, 56);
+            this.btnStartTask.Location = new System.Drawing.Point(482, 89);
             this.btnStartTask.Name = "btnStartTask";
             this.btnStartTask.Size = new System.Drawing.Size(127, 27);
             this.btnStartTask.TabIndex = 7;
@@ -182,68 +204,6 @@
             this.dgvFileDefinition.TabIndex = 1;
             this.dgvFileDefinition.Visible = false;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(165, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Seleccione Maestro a Consolidar:";
-            // 
-            // cboMasterFile
-            // 
-            this.cboMasterFile.DataSource = this.configDataBindingSource;
-            this.cboMasterFile.DisplayMember = "masterfile";
-            this.cboMasterFile.FormattingEnabled = true;
-            this.cboMasterFile.Location = new System.Drawing.Point(183, 17);
-            this.cboMasterFile.Name = "cboMasterFile";
-            this.cboMasterFile.Size = new System.Drawing.Size(218, 21);
-            this.cboMasterFile.TabIndex = 3;
-            this.cboMasterFile.ValueMember = "id";
-            this.cboMasterFile.SelectionChangeCommitted += new System.EventHandler(this.cboMasterFile_SelectionChangeCommitted);
-            // 
-            // configDataBindingSource
-            // 
-            this.configDataBindingSource.DataMember = "configData";
-            this.configDataBindingSource.DataSource = this.excelFilesDataSet;
-            // 
-            // excelFilesDataSet
-            // 
-            this.excelFilesDataSet.DataSetName = "excelFilesDataSet";
-            this.excelFilesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // configDataTableAdapter
-            // 
-            this.configDataTableAdapter.ClearBeforeFill = true;
-            // 
-            // pgbMergeFiles
-            // 
-            this.pgbMergeFiles.Location = new System.Drawing.Point(12, 165);
-            this.pgbMergeFiles.Name = "pgbMergeFiles";
-            this.pgbMergeFiles.Size = new System.Drawing.Size(628, 23);
-            this.pgbMergeFiles.TabIndex = 4;
-            this.pgbMergeFiles.Visible = false;
-            // 
-            // lblProgress
-            // 
-            this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(12, 195);
-            this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(0, 13);
-            this.lblProgress.TabIndex = 5;
-            this.lblProgress.Visible = false;
-            // 
-            // btnExit
-            // 
-            this.btnExit.Location = new System.Drawing.Point(532, 200);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(108, 23);
-            this.btnExit.TabIndex = 6;
-            this.btnExit.Text = "&Salir";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -287,11 +247,73 @@
             this.endrow.Name = "endrow";
             this.endrow.ReadOnly = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(165, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Seleccione Maestro a Consolidar:";
+            // 
+            // cboMasterFile
+            // 
+            this.cboMasterFile.DataSource = this.configDataBindingSource;
+            this.cboMasterFile.DisplayMember = "masterfile";
+            this.cboMasterFile.FormattingEnabled = true;
+            this.cboMasterFile.Location = new System.Drawing.Point(183, 17);
+            this.cboMasterFile.Name = "cboMasterFile";
+            this.cboMasterFile.Size = new System.Drawing.Size(218, 21);
+            this.cboMasterFile.TabIndex = 3;
+            this.cboMasterFile.ValueMember = "id";
+            this.cboMasterFile.SelectionChangeCommitted += new System.EventHandler(this.cboMasterFile_SelectionChangeCommitted);
+            // 
+            // configDataBindingSource
+            // 
+            this.configDataBindingSource.DataMember = "configData";
+            this.configDataBindingSource.DataSource = this.excelFilesDataSet;
+            // 
+            // excelFilesDataSet
+            // 
+            this.excelFilesDataSet.DataSetName = "excelFilesDataSet";
+            this.excelFilesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // configDataTableAdapter
+            // 
+            this.configDataTableAdapter.ClearBeforeFill = true;
+            // 
+            // pgbMergeFiles
+            // 
+            this.pgbMergeFiles.Location = new System.Drawing.Point(12, 189);
+            this.pgbMergeFiles.Name = "pgbMergeFiles";
+            this.pgbMergeFiles.Size = new System.Drawing.Size(628, 23);
+            this.pgbMergeFiles.TabIndex = 4;
+            this.pgbMergeFiles.Visible = false;
+            // 
+            // lblProgress
+            // 
+            this.lblProgress.AutoSize = true;
+            this.lblProgress.Location = new System.Drawing.Point(12, 223);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(0, 13);
+            this.lblProgress.TabIndex = 5;
+            this.lblProgress.Visible = false;
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(532, 218);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(108, 23);
+            this.btnExit.TabIndex = 6;
+            this.btnExit.Text = "&Salir";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // frmMerge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 232);
+            this.ClientSize = new System.Drawing.Size(655, 248);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.pgbMergeFiles);
@@ -343,6 +365,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn worksheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn initrow;
         private System.Windows.Forms.DataGridViewTextBoxColumn endrow;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.CheckBox chkSendEmail;
     }
 }
 

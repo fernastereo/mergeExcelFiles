@@ -16,34 +16,42 @@ namespace mergeExcelFiles
     {
         public const string BASE_PREFIX = "XXX";
 
-        private int _final;          // Valor de finalización
+        #region "Private variables"
+            private int _final;          // end value for the task
+            private string _prefix;
+            private string _masterFile;
+            private int _masterFileId;
+            private DataTable _childFiles;
+            private string _errMsg;
+        #endregion
 
-        private string _prefix;
-        private string _masterFile;
-        private int _masterFileId;
-        private DataTable _childFiles;
-
-        private string _errMsg;
-
-        public string errMsg
-        {
-            get { return _errMsg; }
-        }
-
-        public string masterFile {
-            get {
-                _masterFile = "";
-                OleDbDataAdapter dtaMasterfile = new OleDbDataAdapter("select masterfile, quantitycol from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(dbConfig.getConnectionString()));
-                DataTable dttMasterFile = new DataTable();
-                dtaMasterfile.Fill(dttMasterFile);
-                if (dttMasterFile.Rows.Count > 0)
-                {
-                    string baseFile = dttMasterFile.Rows[0]["masterfile"].ToString().ToUpper();
-                    _masterFile = baseFile.Replace(BASE_PREFIX, _prefix);
-                }
-                return _masterFile;
+        #region "Public Properties"
+            public string errMsg
+            {
+                get { return _errMsg; }
             }
-        }
+
+            public string masterFile {
+                get {
+                    _masterFile = "";
+                    OleDbDataAdapter dtaMasterfile = new OleDbDataAdapter("select masterfile, quantitycol from configdata where status=1 and id=" + _masterFileId, new OleDbConnection(dbConfig.getConnectionString()));
+                    DataTable dttMasterFile = new DataTable();
+                    dtaMasterfile.Fill(dttMasterFile);
+                    if (dttMasterFile.Rows.Count > 0)
+                    {
+                        string baseFile = dttMasterFile.Rows[0]["masterfile"].ToString().ToUpper();
+                        _masterFile = baseFile.Replace(BASE_PREFIX, _prefix);
+                    }
+                    return _masterFile;
+                }
+            }
+
+            public int Final
+            {
+                get { return _final; }
+            }
+
+        #endregion
 
         private string _quantityCol()
         {
@@ -58,19 +66,21 @@ namespace mergeExcelFiles
             return "";
         }
 
-        public merge(string prefix, int masterFileId)
-        {
-            _prefix = prefix;
-            _masterFileId = masterFileId;
-        }
+        #region "Constructors"
+            public merge(string prefix, int masterFileId)
+            {
+                _prefix = prefix;
+                _masterFileId = masterFileId;
+            }
 
-        public merge(DataTable childFiles, int masterFileId)
-        {
-            _prefix = "";
-            _masterFileId = masterFileId;
-            _childFiles = childFiles;
-            _final = _childFiles.Rows.Count;
-        }
+            public merge(DataTable childFiles, int masterFileId)
+            {
+                _prefix = "";
+                _masterFileId = masterFileId;
+                _childFiles = childFiles;
+                _final = _childFiles.Rows.Count;
+            }
+        #endregion
 
         public delegate void cambioPosHandler(object o, PosicEventArgs ev);
 
@@ -79,15 +89,10 @@ namespace mergeExcelFiles
         protected virtual void onCambioPosic(PosicEventArgs e)
         {
             if (cambioPosic != null)
-                cambioPosic(this, e); //invocacion del delegado
+                cambioPosic(this, e); //invoke the delagate
         }
 
-        public int Final
-        {
-            get { return _final; }
-        }
-
-        public void mergeData(string sPath, string masterFile, string projectPrefix)
+        public bool mergeData(string sPath, string masterFile, string projectPrefix)
         {
             int fileDefinitionId = 0;
             int startRow = 0;
@@ -102,7 +107,7 @@ namespace mergeExcelFiles
             if (!System.IO.File.Exists(filePath))
             {
                 _errMsg = "El archivo maestro no existe en la ruta especificada";
-                return;
+                return false;
             }
             masterFileExcel.Workbook xlWorkBook = xlApp.Workbooks.Open(filePath);
             masterFileExcel.Worksheet xlWorkSheet = (masterFileExcel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
@@ -144,8 +149,6 @@ namespace mergeExcelFiles
                     workSheet = workSheet.Substring(0, workSheet.Length - 1);
                     string searchColChild = dtrWorkSheet["searchcol"].ToString();
                     string quantityColChild = dtrWorkSheet["quantitycol"].ToString();
-
-                    Console.WriteLine($"Archivo {fileToProcess} - Hoja: {workSheet}");
 
                     childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];
                     //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
@@ -195,6 +198,7 @@ namespace mergeExcelFiles
 
             killExcel();
             _errMsg = "Proceso finalizado satisfactoriamente";
+            return true;
         }
 
         private void killExcel()

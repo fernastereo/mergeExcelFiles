@@ -25,7 +25,7 @@ namespace mergeExcelFiles
             _port = port;
             _user = user;
             _pass = pass;
-            _essl = essl;
+            _essl = essl; //for Gmail accounts it must use port 25 with SSL
 
             client = new SmtpClient(_host, _port) {
                 EnableSsl = _essl,

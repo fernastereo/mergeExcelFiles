@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Net.Mail;
 
 namespace mergeExcelFiles
 {
     public partial class frmMerge : Form
     {
         private DataTable _dttExcelFiles;
+        private const string _MESSSAGE = "Enviando archivo consolidado por correo electrónico";
 
         public frmMerge()
         {
@@ -26,6 +28,7 @@ namespace mergeExcelFiles
 
             //Quitar la siguiente linea antes de entregar
             flb.SelectedPath = "C:\\Users\\Fernast\\Documents\\Proyectos\\Upwork\\Marga Company\\NUE";
+            txtEmail.Text = "info@css-sas.com";
             //*******************************************
             if (flb.ShowDialog() == DialogResult.OK)
             {
@@ -58,7 +61,18 @@ namespace mergeExcelFiles
             pgbMergeFiles.Minimum = 0;
             pgbMergeFiles.Maximum = task.Final;
             task.cambioPosic += new merge.cambioPosHandler(DB_cambioPosic);
-            task.mergeData(txtProjectPath.Text, txtMasterFile.Text, txtProjectPrefix.Text);
+            if (task.mergeData(txtProjectPath.Text, txtMasterFile.Text, txtProjectPrefix.Text))
+            {
+                //if task runs properly then send the email if it is checked
+                if (chkSendEmail.Checked)
+                {
+                    dbConfig mailConfig = new dbConfig();
+                    emailAdmin eMail = new emailAdmin(mailConfig.Host, mailConfig.Port, mailConfig.User, mailConfig.Password, mailConfig.enableSSL);
+                    string fileAttached = this.txtProjectPath.Text + '\\' + this.txtMasterFile.Text;
+                    eMail.sendEmail(this.txtEmail.Text, this.txtMasterFile.Text, _MESSSAGE, fileAttached);
+                }
+            }
+            //Show the errMsg anyway
             MessageBox.Show(task.errMsg);
             pgbMergeFiles.Visible = false;
             lblProgress.Visible = false;
