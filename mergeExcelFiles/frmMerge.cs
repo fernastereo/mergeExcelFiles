@@ -78,7 +78,7 @@ namespace mergeExcelFiles
                 {
                     dbConfig mailSettings = new dbConfig();
                     mailSettings.getMailconfig();
-                    emailAdmin eMail = new emailAdmin(mailSettings.Host, mailSettings.Port, mailSettings.User, mailSettings.Password, mailSettings.enableSSL);
+                    emailAdmin eMail = new emailAdmin(mailSettings.Host, mailSettings.Port, mailSettings.User, mailSettings.Password, mailSettings.Sender, mailSettings.enableSSL);
                     string fileAttached = this.txtProjectPath.Text + '\\' + this.txtMasterFile.Text;
                     eMail.sendEmail(this.txtEmail.Text, this.txtMasterFile.Text, _MESSSAGE, fileAttached);
                 }

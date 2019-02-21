@@ -36,10 +36,9 @@
             this.configDataTableAdapter = new mergeExcelFiles.excelFilesDataSetTableAdapters.configDataTableAdapter();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.cboMasterFile = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.lblProgress = new System.Windows.Forms.Label();
+            this.pgbMergeFiles = new System.Windows.Forms.ProgressBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.chkSendEmail = new System.Windows.Forms.CheckBox();
@@ -51,9 +50,10 @@
             this.btnOpenPath = new System.Windows.Forms.Button();
             this.txtProjectPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.lblProgress = new System.Windows.Forms.Label();
-            this.pgbMergeFiles = new System.Windows.Forms.ProgressBar();
+            this.cboMasterFile = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.dgvFileDefinition = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,27 +61,27 @@
             this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.initrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnUpdateMailSettings = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtHost = new System.Windows.Forms.TextBox();
-            this.txtUser = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtSender = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.chkEnableSSL = new System.Windows.Forms.CheckBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.numPort = new System.Windows.Forms.NumericUpDown();
+            this.chkEnableSSL = new System.Windows.Forms.CheckBox();
+            this.txtSender = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtUser = new System.Windows.Forms.TextBox();
+            this.txtHost = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnUpdateMailSettings = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.configDataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.excelFilesDataSet)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileDefinition)).BeginInit();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,59 +138,32 @@
             this.tabPage1.Text = "Consolidar";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // btnExit
             // 
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.dgvFileDefinition);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(667, 255);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Parámetros Archivos";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.btnExit.Location = new System.Drawing.Point(538, 219);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(108, 23);
+            this.btnExit.TabIndex = 9;
+            this.btnExit.Text = "&Salir";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // tabPage3
+            // lblProgress
             // 
-            this.tabPage3.Controls.Add(this.numPort);
-            this.tabPage3.Controls.Add(this.chkEnableSSL);
-            this.tabPage3.Controls.Add(this.txtSender);
-            this.tabPage3.Controls.Add(this.txtPassword);
-            this.tabPage3.Controls.Add(this.txtUser);
-            this.tabPage3.Controls.Add(this.txtHost);
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.label8);
-            this.tabPage3.Controls.Add(this.label7);
-            this.tabPage3.Controls.Add(this.label6);
-            this.tabPage3.Controls.Add(this.btnUpdateMailSettings);
-            this.tabPage3.Controls.Add(this.label5);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(667, 255);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Parámetros Correo";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.lblProgress.AutoSize = true;
+            this.lblProgress.Location = new System.Drawing.Point(18, 224);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(0, 13);
+            this.lblProgress.TabIndex = 8;
+            this.lblProgress.Visible = false;
             // 
-            // cboMasterFile
+            // pgbMergeFiles
             // 
-            this.cboMasterFile.DataSource = this.configDataBindingSource;
-            this.cboMasterFile.DisplayMember = "masterfile";
-            this.cboMasterFile.FormattingEnabled = true;
-            this.cboMasterFile.Location = new System.Drawing.Point(186, 17);
-            this.cboMasterFile.Name = "cboMasterFile";
-            this.cboMasterFile.Size = new System.Drawing.Size(218, 21);
-            this.cboMasterFile.TabIndex = 5;
-            this.cboMasterFile.ValueMember = "id";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(165, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Seleccione Maestro a Consolidar:";
+            this.pgbMergeFiles.Location = new System.Drawing.Point(18, 190);
+            this.pgbMergeFiles.Name = "pgbMergeFiles";
+            this.pgbMergeFiles.Size = new System.Drawing.Size(628, 23);
+            this.pgbMergeFiles.TabIndex = 7;
+            this.pgbMergeFiles.Visible = false;
             // 
             // groupBox1
             // 
@@ -241,6 +214,7 @@
             this.btnStartTask.Text = "Consolidar Datos";
             this.btnStartTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStartTask.UseVisualStyleBackColor = true;
+            this.btnStartTask.Click += new System.EventHandler(this.btnStartTask_Click);
             // 
             // txtMasterFile
             // 
@@ -283,6 +257,7 @@
             this.btnOpenPath.Size = new System.Drawing.Size(27, 25);
             this.btnOpenPath.TabIndex = 2;
             this.btnOpenPath.UseVisualStyleBackColor = true;
+            this.btnOpenPath.Click += new System.EventHandler(this.btnOpenPath_Click);
             // 
             // txtProjectPath
             // 
@@ -300,31 +275,47 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Ruta Carpeta:";
             // 
-            // btnExit
+            // cboMasterFile
             // 
-            this.btnExit.Location = new System.Drawing.Point(538, 219);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(108, 23);
-            this.btnExit.TabIndex = 9;
-            this.btnExit.Text = "&Salir";
-            this.btnExit.UseVisualStyleBackColor = true;
+            this.cboMasterFile.DataSource = this.configDataBindingSource;
+            this.cboMasterFile.DisplayMember = "masterfile";
+            this.cboMasterFile.FormattingEnabled = true;
+            this.cboMasterFile.Location = new System.Drawing.Point(186, 17);
+            this.cboMasterFile.Name = "cboMasterFile";
+            this.cboMasterFile.Size = new System.Drawing.Size(218, 21);
+            this.cboMasterFile.TabIndex = 5;
+            this.cboMasterFile.ValueMember = "id";
+            this.cboMasterFile.SelectionChangeCommitted += new System.EventHandler(this.cboMasterFile_SelectionChangeCommitted);
             // 
-            // lblProgress
+            // label4
             // 
-            this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(18, 224);
-            this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(0, 13);
-            this.lblProgress.TabIndex = 8;
-            this.lblProgress.Visible = false;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(165, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Seleccione Maestro a Consolidar:";
             // 
-            // pgbMergeFiles
+            // tabPage2
             // 
-            this.pgbMergeFiles.Location = new System.Drawing.Point(18, 190);
-            this.pgbMergeFiles.Name = "pgbMergeFiles";
-            this.pgbMergeFiles.Size = new System.Drawing.Size(628, 23);
-            this.pgbMergeFiles.TabIndex = 7;
-            this.pgbMergeFiles.Visible = false;
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.dgvFileDefinition);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(667, 255);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Parámetros Archivos";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(538, 213);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(108, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "A&ctualizar";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // dgvFileDefinition
             // 
@@ -388,98 +379,34 @@
             this.endrow.Name = "endrow";
             this.endrow.ReadOnly = true;
             // 
-            // label5
+            // tabPage3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(124, 13);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Servidor Correo Saliente:";
+            this.tabPage3.Controls.Add(this.numPort);
+            this.tabPage3.Controls.Add(this.chkEnableSSL);
+            this.tabPage3.Controls.Add(this.txtSender);
+            this.tabPage3.Controls.Add(this.txtPassword);
+            this.tabPage3.Controls.Add(this.txtUser);
+            this.tabPage3.Controls.Add(this.txtHost);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.label6);
+            this.tabPage3.Controls.Add(this.btnUpdateMailSettings);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(667, 255);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Parámetros Correo";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // btnUpdateMailSettings
+            // numPort
             // 
-            this.btnUpdateMailSettings.Location = new System.Drawing.Point(536, 214);
-            this.btnUpdateMailSettings.Name = "btnUpdateMailSettings";
-            this.btnUpdateMailSettings.Size = new System.Drawing.Size(108, 23);
-            this.btnUpdateMailSettings.TabIndex = 10;
-            this.btnUpdateMailSettings.Text = "A&ctualizar";
-            this.btnUpdateMailSettings.UseVisualStyleBackColor = true;
-            this.btnUpdateMailSettings.Click += new System.EventHandler(this.btnUpdateMailSettings_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 58);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Puerto:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(17, 88);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Usuario:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(17, 117);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Password:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(17, 147);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(95, 13);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "Nombre Remitente";
-            // 
-            // txtHost
-            // 
-            this.txtHost.Location = new System.Drawing.Point(147, 23);
-            this.txtHost.Name = "txtHost";
-            this.txtHost.Size = new System.Drawing.Size(224, 20);
-            this.txtHost.TabIndex = 15;
-            // 
-            // txtUser
-            // 
-            this.txtUser.Location = new System.Drawing.Point(147, 85);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(224, 20);
-            this.txtUser.TabIndex = 18;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(147, 114);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(224, 20);
-            this.txtPassword.TabIndex = 19;
-            // 
-            // txtSender
-            // 
-            this.txtSender.Location = new System.Drawing.Point(147, 144);
-            this.txtSender.Name = "txtSender";
-            this.txtSender.Size = new System.Drawing.Size(224, 20);
-            this.txtSender.TabIndex = 20;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(538, 213);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "A&ctualizar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.numPort.Location = new System.Drawing.Point(147, 56);
+            this.numPort.Name = "numPort";
+            this.numPort.Size = new System.Drawing.Size(61, 20);
+            this.numPort.TabIndex = 16;
             // 
             // chkEnableSSL
             // 
@@ -491,12 +418,89 @@
             this.chkEnableSSL.Text = "Habilitar SSL";
             this.chkEnableSSL.UseVisualStyleBackColor = true;
             // 
-            // numPort
+            // txtSender
             // 
-            this.numPort.Location = new System.Drawing.Point(147, 56);
-            this.numPort.Name = "numPort";
-            this.numPort.Size = new System.Drawing.Size(61, 20);
-            this.numPort.TabIndex = 16;
+            this.txtSender.Location = new System.Drawing.Point(147, 144);
+            this.txtSender.Name = "txtSender";
+            this.txtSender.Size = new System.Drawing.Size(224, 20);
+            this.txtSender.TabIndex = 20;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(147, 114);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(224, 20);
+            this.txtPassword.TabIndex = 19;
+            // 
+            // txtUser
+            // 
+            this.txtUser.Location = new System.Drawing.Point(147, 85);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(224, 20);
+            this.txtUser.TabIndex = 18;
+            // 
+            // txtHost
+            // 
+            this.txtHost.Location = new System.Drawing.Point(147, 23);
+            this.txtHost.Name = "txtHost";
+            this.txtHost.Size = new System.Drawing.Size(224, 20);
+            this.txtHost.TabIndex = 15;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(17, 147);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(95, 13);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Nombre Remitente";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(17, 117);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Password:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(17, 88);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(46, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Usuario:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 58);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Puerto:";
+            // 
+            // btnUpdateMailSettings
+            // 
+            this.btnUpdateMailSettings.Location = new System.Drawing.Point(536, 214);
+            this.btnUpdateMailSettings.Name = "btnUpdateMailSettings";
+            this.btnUpdateMailSettings.Size = new System.Drawing.Size(108, 23);
+            this.btnUpdateMailSettings.TabIndex = 10;
+            this.btnUpdateMailSettings.Text = "A&ctualizar";
+            this.btnUpdateMailSettings.UseVisualStyleBackColor = true;
+            this.btnUpdateMailSettings.Click += new System.EventHandler(this.btnUpdateMailSettings_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(124, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Servidor Correo Saliente:";
             // 
             // frmMerge
             // 
@@ -516,12 +520,12 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileDefinition)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.ResumeLayout(false);
 
