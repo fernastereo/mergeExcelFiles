@@ -10,6 +10,7 @@ namespace mergeExcelFiles
         private string _password;
         private int _port;
         private bool _enableSSL;
+        private string _sender;
 
         public string Host
         {
@@ -36,6 +37,11 @@ namespace mergeExcelFiles
             get { return _enableSSL; }
         }
 
+        public string Sender
+        {
+            get { return _sender; }
+        }
+
         public dbConfig()
         {
             getMailconfig();
@@ -44,7 +50,7 @@ namespace mergeExcelFiles
         private void getMailconfig()
         {
             OleDbConnection strConnection = new OleDbConnection(getConnectionString());
-            OleDbCommand cmdMailConfig = new OleDbCommand("select host, port, user, password, enablessl from mailconfig where status=1", strConnection);
+            OleDbCommand cmdMailConfig = new OleDbCommand("select host, port, user, password, sender, enablessl from mailconfig where status=1", strConnection);
             strConnection.Open();
             OleDbDataReader dtrMailConfig = cmdMailConfig.ExecuteReader();
             if (dtrMailConfig.Read())
@@ -53,6 +59,7 @@ namespace mergeExcelFiles
                 _port = (int)dtrMailConfig["port"];
                 _user = dtrMailConfig["user"].ToString();
                 _password = dtrMailConfig["password"].ToString();
+                _sender = dtrMailConfig["sender"].ToString();
                 _enableSSL = (int)dtrMailConfig["enablessl"] == 1 ? true : false ;
             }
             dtrMailConfig.Close();

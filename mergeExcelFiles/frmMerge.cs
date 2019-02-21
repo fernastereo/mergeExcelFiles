@@ -57,7 +57,7 @@ namespace mergeExcelFiles
             txtUser.Text = mailSettings.User;
             txtPassword.Text = mailSettings.Password;
             
-
+            
         }
 
         private void btnStartTask_Click(object sender, EventArgs e)
