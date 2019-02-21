@@ -404,6 +404,7 @@
             this.btnUpdateMailSettings.TabIndex = 10;
             this.btnUpdateMailSettings.Text = "A&ctualizar";
             this.btnUpdateMailSettings.UseVisualStyleBackColor = true;
+            this.btnUpdateMailSettings.Click += new System.EventHandler(this.btnUpdateMailSettings_Click);
             // 
             // label6
             // 

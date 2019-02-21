@@ -5,51 +5,16 @@ namespace mergeExcelFiles
 {
     public class dbConfig
     {
-        private string _host;
-        private string _user;
-        private string _password;
-        private int _port;
-        private bool _enableSSL;
-        private string _sender;
-
         public string errMsg { get; private set; }
 
-        public string Host
-        {
-            get { return _host; }
-        }
+        public string Host { get; set; }
+        public string User { get; set; }
+        public string Password { get; set; }
+        public int Port { get; set; }
+        public bool enableSSL { get; set; }
+        public string Sender { get; set; }
 
-        public string User
-        {
-            get { return _user; }
-        }
-
-        public string Password
-        {
-            get { return _password; }
-        }
-        
-        public int Port
-        {
-            get { return _port; }
-        }
-
-        public bool enableSSL
-        {
-            get { return _enableSSL; }
-        }
-
-        public string Sender
-        {
-            get { return _sender; }
-        }
-
-        public dbConfig()
-        {
-            getMailconfig();
-        }
-
-        private void getMailconfig()
+        public void getMailconfig()
         {
             using (OleDbConnection strConnection = new OleDbConnection(getConnectionString()))
             {
@@ -58,12 +23,12 @@ namespace mergeExcelFiles
                 OleDbDataReader dtrMailConfig = cmdMailConfig.ExecuteReader();
                 if (dtrMailConfig.Read())
                 {
-                    _host = dtrMailConfig["host"].ToString();
-                    _port = (int)dtrMailConfig["port"];
-                    _user = dtrMailConfig["user"].ToString();
-                    _password = dtrMailConfig["password"].ToString();
-                    _sender = dtrMailConfig["sender"].ToString();
-                    _enableSSL = (int)dtrMailConfig["enablessl"] == 1 ? true : false;
+                    Host = dtrMailConfig["host"].ToString();
+                    Port = (int)dtrMailConfig["port"];
+                    User = dtrMailConfig["user"].ToString();
+                    Password = dtrMailConfig["password"].ToString();
+                    Sender = dtrMailConfig["sender"].ToString();
+                    enableSSL = (int)dtrMailConfig["enablessl"] == 1 ? true : false;
                 }
                 dtrMailConfig.Close();
             }
@@ -76,12 +41,12 @@ namespace mergeExcelFiles
                 using (OleDbConnection strConnection = new OleDbConnection(getConnectionString()))
                 {
                     OleDbCommand cmdMailSettings = new OleDbCommand("update mailconfig set host=@host, port=@port, user=@user, password=@password, sender=@sender, enablessl=@enablessl where id=1", strConnection);
-                    cmdMailSettings.Parameters.AddWithValue("host", _host);
-                    cmdMailSettings.Parameters.AddWithValue("port", _port);
-                    cmdMailSettings.Parameters.AddWithValue("user", _user);
-                    cmdMailSettings.Parameters.AddWithValue("password", _password);
-                    cmdMailSettings.Parameters.AddWithValue("sender", _sender);
-                    cmdMailSettings.Parameters.AddWithValue("enablessl", _enableSSL);
+                    cmdMailSettings.Parameters.AddWithValue("host", Host);
+                    cmdMailSettings.Parameters.AddWithValue("port", Port);
+                    cmdMailSettings.Parameters.AddWithValue("user", User);
+                    cmdMailSettings.Parameters.AddWithValue("password", Password);
+                    cmdMailSettings.Parameters.AddWithValue("sender", Sender);
+                    cmdMailSettings.Parameters.AddWithValue("enablessl", enableSSL);
                     cmdMailSettings.ExecuteNonQuery();
                     return true;
                 }
@@ -92,6 +57,7 @@ namespace mergeExcelFiles
                 throw new System.Exception("Se ha producido un error al guardar. ", e);
             }
         }
+
         public static string getConnectionString()
         {
             return System.Configuration.ConfigurationManager.ConnectionStrings["mergeExcelFiles.Properties.Settings.excelFilesConnectionString"].ConnectionString.ToString();

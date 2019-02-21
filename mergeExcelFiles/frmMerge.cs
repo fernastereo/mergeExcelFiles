@@ -51,6 +51,7 @@ namespace mergeExcelFiles
 
             //retrieve email settings
             dbConfig mailSettings = new dbConfig();
+            mailSettings.getMailconfig();
             txtHost.Text = mailSettings.Host;
             txtPort.Text = mailSettings.Port.ToString();
             chkEnableSSL.Checked = mailSettings.enableSSL;
@@ -76,8 +77,9 @@ namespace mergeExcelFiles
                 //if task runs properly then send the email if it is checked
                 if (chkSendEmail.Checked)
                 {
-                    dbConfig mailConfig = new dbConfig();
-                    emailAdmin eMail = new emailAdmin(mailConfig.Host, mailConfig.Port, mailConfig.User, mailConfig.Password, mailConfig.enableSSL);
+                    dbConfig mailSettings = new dbConfig();
+                    mailSettings.getMailconfig();
+                    emailAdmin eMail = new emailAdmin(mailSettings.Host, mailSettings.Port, mailSettings.User, mailSettings.Password, mailSettings.enableSSL);
                     string fileAttached = this.txtProjectPath.Text + '\\' + this.txtMasterFile.Text;
                     eMail.sendEmail(this.txtEmail.Text, this.txtMasterFile.Text, _MESSSAGE, fileAttached);
                 }
@@ -106,6 +108,14 @@ namespace mergeExcelFiles
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnUpdateMailSettings_Click(object sender, EventArgs e)
+        {
+            dbConfig mailSettings = new dbConfig();
+            mailSettings.Host = txtHost.Text;
+
+
         }
     }
 }
