@@ -18,7 +18,7 @@ namespace mergeExcelFiles
         private string _user;
         private string _pass;
         private bool _essl;
-
+                
         public emailAdmin(string host, int port, string user, string pass, bool essl)
         {
             _host = host;
