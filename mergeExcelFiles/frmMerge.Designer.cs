@@ -68,12 +68,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtHost = new System.Windows.Forms.TextBox();
-            this.txtPort = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtSender = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.chkEnableSSL = new System.Windows.Forms.CheckBox();
+            this.numPort = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.configDataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.excelFilesDataSet)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -82,6 +82,7 @@
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileDefinition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
             // imlIcons
@@ -151,11 +152,11 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.numPort);
             this.tabPage3.Controls.Add(this.chkEnableSSL);
             this.tabPage3.Controls.Add(this.txtSender);
             this.tabPage3.Controls.Add(this.txtPassword);
             this.tabPage3.Controls.Add(this.txtUser);
-            this.tabPage3.Controls.Add(this.txtPort);
             this.tabPage3.Controls.Add(this.txtHost);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.label8);
@@ -449,19 +450,12 @@
             this.txtHost.Size = new System.Drawing.Size(224, 20);
             this.txtHost.TabIndex = 15;
             // 
-            // txtPort
-            // 
-            this.txtPort.Location = new System.Drawing.Point(147, 55);
-            this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(45, 20);
-            this.txtPort.TabIndex = 16;
-            // 
             // txtUser
             // 
             this.txtUser.Location = new System.Drawing.Point(147, 85);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(224, 20);
-            this.txtUser.TabIndex = 17;
+            this.txtUser.TabIndex = 18;
             // 
             // txtPassword
             // 
@@ -469,14 +463,14 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(224, 20);
-            this.txtPassword.TabIndex = 18;
+            this.txtPassword.TabIndex = 19;
             // 
             // txtSender
             // 
             this.txtSender.Location = new System.Drawing.Point(147, 144);
             this.txtSender.Name = "txtSender";
             this.txtSender.Size = new System.Drawing.Size(224, 20);
-            this.txtSender.TabIndex = 19;
+            this.txtSender.TabIndex = 20;
             // 
             // button1
             // 
@@ -493,9 +487,16 @@
             this.chkEnableSSL.Location = new System.Drawing.Point(224, 57);
             this.chkEnableSSL.Name = "chkEnableSSL";
             this.chkEnableSSL.Size = new System.Drawing.Size(87, 17);
-            this.chkEnableSSL.TabIndex = 20;
+            this.chkEnableSSL.TabIndex = 17;
             this.chkEnableSSL.Text = "Habilitar SSL";
             this.chkEnableSSL.UseVisualStyleBackColor = true;
+            // 
+            // numPort
+            // 
+            this.numPort.Location = new System.Drawing.Point(147, 56);
+            this.numPort.Name = "numPort";
+            this.numPort.Size = new System.Drawing.Size(61, 20);
+            this.numPort.TabIndex = 16;
             // 
             // frmMerge
             // 
@@ -521,6 +522,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileDefinition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -567,9 +569,9 @@
         private System.Windows.Forms.TextBox txtSender;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUser;
-        private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.TextBox txtHost;
         private System.Windows.Forms.CheckBox chkEnableSSL;
+        private System.Windows.Forms.NumericUpDown numPort;
     }
 }
 

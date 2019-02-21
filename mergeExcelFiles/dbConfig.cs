@@ -40,21 +40,22 @@ namespace mergeExcelFiles
             {
                 using (OleDbConnection strConnection = new OleDbConnection(getConnectionString()))
                 {
-                    OleDbCommand cmdMailSettings = new OleDbCommand("update mailconfig set host=@host, port=@port, user=@user, password=@password, sender=@sender, enablessl=@enablessl where id=1", strConnection);
+                    OleDbCommand cmdMailSettings = new OleDbCommand("update mailconfig set host=@host, port=@port, [user]=@user, [password]=@password, sender=@sender, enablessl=@enablessl where id=1", strConnection);
+                    strConnection.Open();
                     cmdMailSettings.Parameters.AddWithValue("host", Host);
                     cmdMailSettings.Parameters.AddWithValue("port", Port);
                     cmdMailSettings.Parameters.AddWithValue("user", User);
                     cmdMailSettings.Parameters.AddWithValue("password", Password);
                     cmdMailSettings.Parameters.AddWithValue("sender", Sender);
-                    cmdMailSettings.Parameters.AddWithValue("enablessl", enableSSL);
+                    cmdMailSettings.Parameters.AddWithValue("enablessl", enableSSL == true ? 1 : 0);
                     cmdMailSettings.ExecuteNonQuery();
                     return true;
                 }
-
             }
             catch (System.Exception e)
             {
-                throw new System.Exception("Se ha producido un error al guardar. ", e);
+                errMsg = e.Message;
+                return false;
             }
         }
 

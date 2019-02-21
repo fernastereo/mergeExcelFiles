@@ -53,12 +53,11 @@ namespace mergeExcelFiles
             dbConfig mailSettings = new dbConfig();
             mailSettings.getMailconfig();
             txtHost.Text = mailSettings.Host;
-            txtPort.Text = mailSettings.Port.ToString();
+            numPort.Value = mailSettings.Port;
             chkEnableSSL.Checked = mailSettings.enableSSL;
             txtUser.Text = mailSettings.User;
             txtPassword.Text = mailSettings.Password;
-            
-            
+            txtSender.Text = mailSettings.Sender;
         }
 
         private void btnStartTask_Click(object sender, EventArgs e)
@@ -114,8 +113,16 @@ namespace mergeExcelFiles
         {
             dbConfig mailSettings = new dbConfig();
             mailSettings.Host = txtHost.Text;
+            mailSettings.Port = (int)numPort.Value;
+            mailSettings.enableSSL = chkEnableSSL.Checked;
+            mailSettings.User = txtUser.Text.ToLower();
+            mailSettings.Password = txtPassword.Text;
+            mailSettings.Sender = txtSender.Text.ToUpper();
 
-
+            if (!mailSettings.saveMailSettings())
+            {
+                MessageBox.Show(mailSettings.errMsg);
+            }
         }
     }
 }
