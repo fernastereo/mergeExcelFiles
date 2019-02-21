@@ -73,6 +73,7 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtSender = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.chkEnableSSL = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.configDataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.excelFilesDataSet)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -150,6 +151,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.chkEnableSSL);
             this.tabPage3.Controls.Add(this.txtSender);
             this.tabPage3.Controls.Add(this.txtPassword);
             this.tabPage3.Controls.Add(this.txtUser);
@@ -484,6 +486,16 @@
             this.button1.Text = "A&ctualizar";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // chkEnableSSL
+            // 
+            this.chkEnableSSL.AutoSize = true;
+            this.chkEnableSSL.Location = new System.Drawing.Point(224, 57);
+            this.chkEnableSSL.Name = "chkEnableSSL";
+            this.chkEnableSSL.Size = new System.Drawing.Size(87, 17);
+            this.chkEnableSSL.TabIndex = 20;
+            this.chkEnableSSL.Text = "Habilitar SSL";
+            this.chkEnableSSL.UseVisualStyleBackColor = true;
+            // 
             // frmMerge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -556,6 +568,7 @@
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.TextBox txtHost;
+        private System.Windows.Forms.CheckBox chkEnableSSL;
     }
 }
 

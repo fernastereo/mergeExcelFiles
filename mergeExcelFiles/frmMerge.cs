@@ -48,6 +48,16 @@ namespace mergeExcelFiles
         {
             // TODO: esta línea de código carga datos en la tabla 'excelFilesDataSet.configData' Puede moverla o quitarla según sea necesario.
             this.configDataTableAdapter.Fill(this.excelFilesDataSet.configData);
+
+            //retrieve email settings
+            dbConfig mailSettings = new dbConfig();
+            txtHost.Text = mailSettings.Host;
+            txtPort.Text = mailSettings.Port.ToString();
+            chkEnableSSL.Checked = mailSettings.enableSSL;
+            txtUser.Text = mailSettings.User;
+            txtPassword.Text = mailSettings.Password;
+            
+
         }
 
         private void btnStartTask_Click(object sender, EventArgs e)
