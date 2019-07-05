@@ -103,7 +103,7 @@ namespace mergeExcelFiles
             string filePath = sPath + "\\" + masterFile;
             masterFileExcel.Application xlApp = new masterFileExcel.Application();
 
-            //I Must catch a exception here when the file doesn't exits in folder------>>>>
+            //I Must catch a exception here when the file does not exits in folder------>>>>
             if (!System.IO.File.Exists(filePath))
             {
                 _errMsg = "El archivo maestro no existe en la ruta especificada";
@@ -111,7 +111,7 @@ namespace mergeExcelFiles
             }
             masterFileExcel.Workbook xlWorkBook = xlApp.Workbooks.Open(filePath);
             masterFileExcel.Worksheet xlWorkSheet = (masterFileExcel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
+            
             masterFileExcel.Range xlRange = xlWorkSheet.UsedRange;
 
             //for each child file in gridView:
@@ -139,18 +139,42 @@ namespace mergeExcelFiles
                 childFileExcel.Application xlAppChild = new childFileExcel.Application();
                 childFileExcel.Workbook xlWorkBookChild = xlAppChild.Workbooks.Open(filePath);
 
+                // ***** temporary code
+
+                //foreach (var xSheet in excelSheets)
+                //{
+                //    childFileExcel.Worksheet excelSheets = xlWorkBook.Worksheets
+                //    string name = xSheet.Name;
+                //}
+                //Console.WriteLine(filePath);
+                //Console.WriteLine(xlWorkBookChild.Worksheets.Count);
+                //string name = "";
+                //for (int j = 1; j <= xlWorkBookChild.Worksheets.Count; j++)
+                //{
+                //    xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBook.Worksheets.get_Item(j);
+                //    name = xlWorkSheetChild.Names.Item(j).ToString();
+
+                //    //excelSheets = excelWorkbook.Worksheets;
+                //    //childFileExcel.Worksheet excelWorksheet = (childFileExcel.Worksheet)excelSheets.get_Item(1);
+                //    //string name = excelWorksheet.Name;//Sheet Name
+                //}
+                //Console.WriteLine(name);
+                // * end temporary code
+
+
                 //Here I get all the sheets for every child file and process it
                 DataTable dttWorkSheets = getWorkSheets(fileDefinitionId);
 
                 //Process each worksheet in xlsFile
                 foreach (DataRow dtrWorkSheet in dttWorkSheets.Rows)
                 {
-                    workSheet = dtrWorkSheet["worksheet"].ToString(); //<<-- Here is where I assign the worksheet
-                    workSheet = workSheet.Substring(0, workSheet.Length - 1);
                     string searchColChild = dtrWorkSheet["searchcol"].ToString();
                     string quantityColChild = dtrWorkSheet["quantitycol"].ToString();
 
-                    childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];
+                    workSheet = dtrWorkSheet["worksheet"].ToString(); //<<-- Here is where I caugth the worksheet name from DB
+                    workSheet = workSheet.Substring(0, workSheet.Length - 1);
+
+                    childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];//<<-- Here is where I assign the worksheet
                     //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
                     childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns[searchColChild];
 

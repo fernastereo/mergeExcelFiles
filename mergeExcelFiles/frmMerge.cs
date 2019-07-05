@@ -28,7 +28,7 @@ namespace mergeExcelFiles
 
             //Quitar la siguiente linea antes de entregar
             flb.SelectedPath = "C:\\Users\\Fernast\\Documents\\Proyectos\\Upwork\\Marga Company\\NUE";
-            txtEmail.Text = "info@css-sas.com";
+            
             //*******************************************
             if (flb.ShowDialog() == DialogResult.OK)
             {
@@ -104,11 +104,17 @@ namespace mergeExcelFiles
             dgvFileDefinition.DataSource = _dttExcelFiles;
         }
 
+        private void fncSearchForWorksheets() {
+            //This function is for identify each worksheet in the excel file 
+            //before start to process it.
+            //This function must be deleted.
+        }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        
         private void btnUpdateMailSettings_Click(object sender, EventArgs e)
         {
             dbConfig mailSettings = new dbConfig();

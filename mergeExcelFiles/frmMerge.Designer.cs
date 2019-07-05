@@ -53,7 +53,6 @@
             this.cboMasterFile = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.dgvFileDefinition = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tittle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +60,7 @@
             this.worksheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.initrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.numPort = new System.Windows.Forms.NumericUpDown();
             this.chkEnableSSL = new System.Windows.Forms.CheckBox();
@@ -298,8 +298,8 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.dgvFileDefinition);
+            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -308,18 +308,8 @@
             this.tabPage2.Text = "Parámetros Archivos";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(538, 213);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "A&ctualizar";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // dgvFileDefinition
             // 
-            this.dgvFileDefinition.AllowUserToAddRows = false;
             this.dgvFileDefinition.AllowUserToDeleteRows = false;
             this.dgvFileDefinition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFileDefinition.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -331,10 +321,8 @@
             this.endrow});
             this.dgvFileDefinition.Location = new System.Drawing.Point(18, 19);
             this.dgvFileDefinition.Name = "dgvFileDefinition";
-            this.dgvFileDefinition.ReadOnly = true;
-            this.dgvFileDefinition.Size = new System.Drawing.Size(628, 188);
+            this.dgvFileDefinition.Size = new System.Drawing.Size(628, 199);
             this.dgvFileDefinition.TabIndex = 2;
-            this.dgvFileDefinition.Visible = false;
             // 
             // id
             // 
@@ -378,6 +366,15 @@
             this.endrow.HeaderText = "Final";
             this.endrow.Name = "endrow";
             this.endrow.ReadOnly = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(538, 224);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(108, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "A&ctualizar";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
