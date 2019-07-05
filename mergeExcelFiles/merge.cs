@@ -118,9 +118,11 @@ namespace mergeExcelFiles
             int n = _final;
             string searchCode;
             string workSheet;
+            bool fileExits;
 
             for (int i = 0; i < n; i++)
             {
+                fileExits = true;
                 onCambioPosic(new PosicEventArgs(i));
                 //Get the child filename and replace the XXX by project prefix
                 fileToProcess = _childFiles.Rows[i]["filename"].ToString().ToUpper().Replace(BASE_PREFIX, projectPrefix);
@@ -137,80 +139,67 @@ namespace mergeExcelFiles
                 filePath = sPath + "\\" + fileToProcess + ".xls";
                 //Open the child file:
                 childFileExcel.Application xlAppChild = new childFileExcel.Application();
-                childFileExcel.Workbook xlWorkBookChild = xlAppChild.Workbooks.Open(filePath);
 
-                // ***** temporary code
-
-                //foreach (var xSheet in excelSheets)
-                //{
-                //    childFileExcel.Worksheet excelSheets = xlWorkBook.Worksheets
-                //    string name = xSheet.Name;
-                //}
-                //Console.WriteLine(filePath);
-                //Console.WriteLine(xlWorkBookChild.Worksheets.Count);
-                //string name = "";
-                //for (int j = 1; j <= xlWorkBookChild.Worksheets.Count; j++)
-                //{
-                //    xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBook.Worksheets.get_Item(j);
-                //    name = xlWorkSheetChild.Names.Item(j).ToString();
-
-                //    //excelSheets = excelWorkbook.Worksheets;
-                //    //childFileExcel.Worksheet excelWorksheet = (childFileExcel.Worksheet)excelSheets.get_Item(1);
-                //    //string name = excelWorksheet.Name;//Sheet Name
-                //}
-                //Console.WriteLine(name);
-                // * end temporary code
-
-
-                //Here I get all the sheets for every child file and process it
-                DataTable dttWorkSheets = getWorkSheets(fileDefinitionId);
-
-                //Process each worksheet in xlsFile
-                foreach (DataRow dtrWorkSheet in dttWorkSheets.Rows)
+                //Verify if the child file exits before try to open it
+                if (!System.IO.File.Exists(filePath))
                 {
-                    string searchColChild = dtrWorkSheet["searchcol"].ToString();
-                    string quantityColChild = dtrWorkSheet["quantitycol"].ToString();
+                    _errMsg = $"El archivo {fileToProcess} no existe en la ruta especificada";
+                    fileExits = false;
+                }
 
-                    workSheet = dtrWorkSheet["worksheet"].ToString(); //<<-- Here is where I caugth the worksheet name from DB
-                    workSheet = workSheet.Substring(0, workSheet.Length - 1);
+                if (fileExits)
+                {
+                    childFileExcel.Workbook xlWorkBookChild = xlAppChild.Workbooks.Open(filePath);
+                    //Here I get all the sheets for every child file and process it
+                    DataTable dttWorkSheets = getWorkSheets(fileDefinitionId);
 
-                    childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];//<<-- Here is where I assign the worksheet
-                    //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
-                    childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns[searchColChild];
-
-                    //for each record from init to end in masterfile
-                    for (int rowCount = startRow; rowCount <= endRow; rowCount++)
+                    //Process each worksheet in xlsFile
+                    foreach (DataRow dtrWorkSheet in dttWorkSheets.Rows)
                     {
-                        //get the code we will look for in master file
-                        searchCode = Convert.ToString((xlRange.Cells[rowCount, 1] as masterFileExcel.Range).Text);
+                        string searchColChild = dtrWorkSheet["searchcol"].ToString();
+                        string quantityColChild = dtrWorkSheet["quantitycol"].ToString();
 
-                        if (!string.IsNullOrEmpty(searchCode) && searchCode.Length > 1)
+                        workSheet = dtrWorkSheet["worksheet"].ToString(); //<<-- Here is where I caugth the worksheet name from DB
+                        workSheet = workSheet.Substring(0, workSheet.Length - 1);
+
+                        childFileExcel.Worksheet xlWorkSheetChild = (childFileExcel.Worksheet)xlWorkBookChild.Worksheets[workSheet];//<<-- Here is where I assign the worksheet
+                        //childFileExcel.Range xlRangeChild = xlWorkSheetChild.UsedRange; :original line
+                        childFileExcel.Range xlRangeChild = xlWorkSheetChild.Columns[searchColChild];
+
+                        //for each record from init to end in masterfile
+                        for (int rowCount = startRow; rowCount <= endRow; rowCount++)
                         {
-                            // search searchString in the range, if find result, return a range
-                            childFileExcel.Range resultRange = xlRangeChild.Find(
-                                What: searchCode,
-                                LookIn: childFileExcel.XlFindLookIn.xlValues,
-                                LookAt: childFileExcel.XlLookAt.xlPart,
-                                SearchOrder: childFileExcel.XlSearchOrder.xlByRows,
-                                SearchDirection: childFileExcel.XlSearchDirection.xlNext
-                            );
-                            if (resultRange != null)
-                            {
-                                int rowResult = resultRange.Row;
+                            //get the code we will look for in master file
+                            searchCode = Convert.ToString((xlRange.Cells[rowCount, 1] as masterFileExcel.Range).Text);
 
-                                string childValue = Convert.ToString((xlWorkSheetChild.Cells[rowResult, quantityColChild] as masterFileExcel.Range).Text);
-                                xlWorkSheet.Cells[rowCount, qCol] = childValue;
+                            if (!string.IsNullOrEmpty(searchCode) && searchCode.Length > 1)
+                            {
+                                // search searchString in the range, if find result, return a range
+                                childFileExcel.Range resultRange = xlRangeChild.Find(
+                                    What: searchCode,
+                                    LookIn: childFileExcel.XlFindLookIn.xlValues,
+                                    LookAt: childFileExcel.XlLookAt.xlPart,
+                                    SearchOrder: childFileExcel.XlSearchOrder.xlByRows,
+                                    SearchDirection: childFileExcel.XlSearchDirection.xlNext
+                                );
+                                if (resultRange != null)
+                                {
+                                    int rowResult = resultRange.Row;
+
+                                    string childValue = Convert.ToString((xlWorkSheetChild.Cells[rowResult, quantityColChild] as masterFileExcel.Range).Text);
+                                    xlWorkSheet.Cells[rowCount, qCol] = childValue;
+                                }
                             }
                         }
+                        Marshal.ReleaseComObject(xlWorkSheetChild);
                     }
-                    Marshal.ReleaseComObject(xlWorkSheetChild);
-                }
-                //close the child file:
-                xlWorkBookChild.Close(false);
-                xlAppChild.Quit();
+                    //close the child file:
+                    xlWorkBookChild.Close(false);
+                    xlAppChild.Quit();
 
-                Marshal.ReleaseComObject(xlWorkBookChild);
-                Marshal.ReleaseComObject(xlAppChild);
+                    Marshal.ReleaseComObject(xlWorkBookChild);
+                    Marshal.ReleaseComObject(xlAppChild);
+                }
             }
             xlWorkBook.Save();
             xlWorkBook.Close(true);

@@ -27,7 +27,7 @@ namespace mergeExcelFiles
             FolderBrowserDialog flb = new FolderBrowserDialog();
 
             //Quitar la siguiente linea antes de entregar
-            flb.SelectedPath = "C:\\Users\\Fernast\\Documents\\Proyectos\\Upwork\\Marga Company\\NUE";
+            flb.SelectedPath = "C:\\Users\\Fernast\\Documents\\Proyectos\\Upwork\\Marga Company\\DER";
             
             //*******************************************
             if (flb.ShowDialog() == DialogResult.OK)
