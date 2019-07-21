@@ -26,9 +26,6 @@ namespace mergeExcelFiles
         {
             FolderBrowserDialog flb = new FolderBrowserDialog();
 
-            //Quitar la siguiente linea antes de entregar
-            flb.SelectedPath = "C:\\Users\\Fernast\\Documents\\Proyectos\\Upwork\\Marga Company\\DER";
-            
             //*******************************************
             if (flb.ShowDialog() == DialogResult.OK)
             {
@@ -48,6 +45,11 @@ namespace mergeExcelFiles
         {
             // TODO: esta línea de código carga datos en la tabla 'excelFilesDataSet.configData' Puede moverla o quitarla según sea necesario.
             this.configDataTableAdapter.Fill(this.excelFilesDataSet.configData);
+
+            cboMasterFile.SelectedItem = 0;
+            int master_id = (int)cboMasterFile.SelectedValue;
+            _dttExcelFiles = merge.getFileDefinition(master_id);
+            dgvFileDefinition.DataSource = _dttExcelFiles;
 
             //retrieve email settings
             dbConfig mailSettings = new dbConfig();
