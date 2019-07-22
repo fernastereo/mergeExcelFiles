@@ -53,7 +53,7 @@ namespace mergeExcelFiles
 
             //retrieve email settings
             dbConfig mailSettings = new dbConfig();
-            mailSettings.getMailconfig();
+            mailSettings.getMailconfigTxt();
             txtHost.Text = mailSettings.Host;
             numPort.Value = mailSettings.Port;
             chkEnableSSL.Checked = mailSettings.enableSSL;
@@ -127,7 +127,7 @@ namespace mergeExcelFiles
             mailSettings.Password = txtPassword.Text;
             mailSettings.Sender = txtSender.Text.ToUpper();
 
-            if (!mailSettings.saveMailSettings())
+            if (!mailSettings.saveMailSettingsTxt())
             {
                 MessageBox.Show(mailSettings.errMsg);
             }

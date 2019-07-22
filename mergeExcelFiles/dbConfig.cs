@@ -1,10 +1,14 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.OleDb;
+using System.IO;
 
 namespace mergeExcelFiles
 {
     public class dbConfig
     {
+        string textFile = AppDomain.CurrentDomain.BaseDirectory + "mail.txt";
+
         public string errMsg { get; private set; }
 
         public string Host { get; set; }
@@ -31,6 +35,42 @@ namespace mergeExcelFiles
                     enableSSL = (int)dtrMailConfig["enablessl"] == 1 ? true : false;
                 }
                 dtrMailConfig.Close();
+            }
+        }
+
+        public void getMailconfigTxt() {
+
+            string[] lines = File.ReadAllLines(textFile);
+            if (lines.Length > 0)
+            {
+                Host = lines[0].ToString();
+                Port = int.Parse(lines[1]);
+                User = lines[2];
+                Password = lines[3];
+                enableSSL = int.Parse(lines[4]) == 1 ? true : false;
+                Sender = lines[5];
+            }
+        }
+
+        public bool saveMailSettingsTxt() {
+           try
+            {
+                File.WriteAllText(textFile, String.Empty);
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(textFile))
+                {
+                    sw.WriteLine(Host);
+                    sw.WriteLine(Port);
+                    sw.WriteLine(User);
+                    sw.WriteLine(Password);
+                    sw.WriteLine(Sender);
+                    sw.WriteLine(enableSSL == true ? 1 : 0);
+                }
+                return true;
+            } catch (System.Exception e)
+            {
+                errMsg = e.Message;
+                return false;
             }
         }
 

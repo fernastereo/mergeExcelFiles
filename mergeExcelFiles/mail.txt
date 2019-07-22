@@ -1,0 +1,6 @@
+﻿smtp.gmail.com
+25
+correo@gmail.com
+password
+1
+Archivos Excel Compilados
